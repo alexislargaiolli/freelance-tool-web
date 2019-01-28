@@ -1,0 +1,81 @@
+@import 'variables';
+:host {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+$title-margin: 50px;
+$space-between-title-and-bar: 2px;
+$progress-bar-height: 2px;
+$loading-message-height: 15px;
+.authenticating-wrapper {
+    margin-top: -$title-margin + $space-between-title-and-bar;
+    margin-bottom: $title-margin -$space-between-title-and-bar - $progress-bar-height - $loading-message-height;
+    .mat-progress-bar {
+        height: $progress-bar-height;
+    }
+    &>div {
+        display: block;
+        height: $loading-message-height;
+        line-height: $loading-message-height;
+        font-size: 12px;
+        color: #aaa;
+        text-align: right;
+    }
+}
+
+h1 {
+    flex: 1;
+    font-size: 36px;
+    font-weight: 300;
+    color: $medium-grey;
+    margin-bottom: $title-margin;
+}
+
+p {
+    margin: 0 0 12px 0;
+    font-weight: 500;
+    color: $medium-grey;
+}
+
+section {}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    .fields {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .actions {
+        align-items: baseline;
+        display: flex;
+        justify-content: flex-end;
+        mat-form-field {
+            margin: 0 10px 0 0;
+        }
+    }
+}
+
+.success-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    mat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 40px;
+    }
+    p {
+        margin-top: 20px;
+        font-weight: 300;
+    }
+}

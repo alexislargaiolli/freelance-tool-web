@@ -1,0 +1,22 @@
+<mat-toolbar>
+    <button mat-icon-button
+            (click)="sidenav.toggle()"
+            *ngIf="mobileBreakpoint$ | async">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>FreelanceTool</span>
+</mat-toolbar>
+
+<mat-sidenav-container (backdropClick)="close('backdrop')">
+    <mat-sidenav #sidenav
+                 [mode]="sideNavMode$ | async"
+                 [fixedInViewport]="mobileBreakpoint$ | async"
+                 (keydown.escape)="close('escape')"
+                 fixedTopGap="56">
+        <app-sidenav></app-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

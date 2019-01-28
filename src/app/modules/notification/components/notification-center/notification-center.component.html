@@ -1,0 +1,8 @@
+<ng-container *ngIf="(notifications$ | async) as notifications">
+    <app-notification *ngFor="let notif of notifications"
+                      [lifetime]="defaultLifeTime"
+                      [notification]="notif"
+                      (lifetimeOver)="removeNotification(notif)"
+                      [@notifAnim]="notifications?.length">
+    </app-notification>
+</ng-container>

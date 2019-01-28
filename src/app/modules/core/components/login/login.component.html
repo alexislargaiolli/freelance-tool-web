@@ -1,0 +1,51 @@
+<div class="success-message"
+     *ngIf="authenticated$ | async; else notAuthenticatedTemplate">
+  <mat-icon class="text-success">check_circle</mat-icon>
+  <p>Connexion acceptée</p>
+</div>
+<ng-template #notAuthenticatedTemplate>
+  <section>
+    <h1>Freelance Tool</h1>
+
+    <div class="authenticating-wrapper"
+         *ngIf="authenticating$ | async">
+      <mat-progress-bar mode="indeterminate"
+                        color="primary"
+                        class="login-spinner"></mat-progress-bar>
+      <div>Connexion en cours...</div>
+    </div>
+    <form #loginForm="ngForm"
+          (ngSubmit)="login(loginForm)">
+      <div class="fields">
+        <mat-form-field>
+          <mat-label>Identifiant</mat-label>
+          <input matInput
+                 class="e2e-userid-field"
+                 placeholder="Saisir"
+                 type="email"
+                 ngModel
+                 name="username"
+                 required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Mot de passe</mat-label>
+          <input matInput
+                 class="e2e-password-field"
+                 placeholder="Saisir"
+                 type="password"
+                 ngModel
+                 name="password"
+                 required>
+        </mat-form-field>
+      </div>
+      <div class="actions">
+        <button type="submit"
+                mat-stroked-button
+                color="primary"
+                [disabled]="authenticating$ | async"
+                class="login-btn e2e-legacy-login-btn">Valider</button>
+      </div>
+    </form>
+  </section>
+</ng-template>

@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "./styles/material.scss";
+@import "./styles/fonts.scss";
+html,
+body {
+    padding: 0;
+    margin: 0;
+    display: block;
+    height: 100%;
+    font-family: 'Aileron';
+    font-size: 14px;
+    color: #444;
+}

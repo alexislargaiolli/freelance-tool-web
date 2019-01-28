@@ -1,0 +1,146 @@
+@import 'variables';
+// ********************************************* //
+//               COMMON CSS CLASSES              //
+// ********************************************* //
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    display: block;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.text-danger {
+    color: $color-danger;
+}
+
+.bg-danger,
+.bg-error {
+    background: $color-danger;
+}
+
+.text-warning {
+    color: $color-warning;
+}
+
+.bg-warning {
+    background: $color-warning;
+}
+
+.text-success {
+    color: $color-success;
+}
+
+.bg-success {
+    background: $color-success;
+}
+
+.text-info {
+    color: $color-info;
+}
+
+.bg-info {
+    background: $color-info;
+}
+
+button.blue {
+    background: #4285f4;
+    color: #fff;
+}
+
+button.green {
+    background: #5cb85c;
+    color: #fff;
+}
+
+button.yellow {
+    background: #f0ad4e;
+    color: #fff;
+}
+
+button.red {
+    background: #d9534f;
+    color: #fff;
+}
+
+.centerContentXY {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-white {
+    background: white;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.light-scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.light-scrollbar::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.very-light-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.very-light-scrollbar::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.very-light-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mat-button.icon-only,
+.mat-raised-button.icon-only {
+    padding: 0;
+    min-width: 40px;
+}
+
+.mat-icon-button.small {
+    line-height: 24px;
+    width: 24px;
+    height: 24px;
+    mat-icon {
+        font-size: 20px;
+    }
+}
+
+.max-width-dialog {
+    width: 100%;
+    max-width: 1000px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+mr-10 {
+    margin-right: 10px;
+}
+
+ml-10 {
+    margin-left: 10px;
+}
+
+mr-5 {
+    margin-right: 5px;
+}
+
+ml-5 {
+    margin-left: 5px;
+}

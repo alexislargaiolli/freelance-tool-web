@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,6 +17,26 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@env/*": [
+        "./environments/*"
+      ],
+      "@models": [
+        "app/models/index"
+      ],
+      "@auth/*": [
+        "app/modules/auth/*"
+      ],
+      "@core/*": [
+        "app/modules/core/*"
+      ],
+      "@shared/*": [
+        "app/modules/shared/*"
+      ],
+      "@notification/*": [
+        "app/modules/notification/*"
+      ],
+    }
   }
 }
