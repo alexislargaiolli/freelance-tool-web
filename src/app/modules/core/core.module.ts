@@ -14,6 +14,9 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     SharedModule,
     FormsModule,
     RouterModule
+  ],
+  entryComponents: [
+    ConfirmDialogComponent
   ]
 })
 export class CoreModule { }
