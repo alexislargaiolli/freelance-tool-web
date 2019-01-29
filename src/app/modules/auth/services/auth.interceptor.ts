@@ -4,6 +4,7 @@ import { NotificationService } from '@notification/services/notification.service
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
         private _authService: AuthService,
-        private _notification: NotificationService
+        private _notification: NotificationService,
+        private _router: Router
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // Clone the request to add the new header.
         req = req.clone({
             setHeaders: {
-                token: authToken
+                Authorization: `Bearer ${authToken}`
             }
         });
         // Pass on the cloned request instead of the original request.
@@ -39,6 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 (err: HttpErrorResponse) => {
                     if (err instanceof HttpErrorResponse) {
                         if (err.status === 401) {
+                            this._router.navigateByUrl('/login');
                             this._authService.logoutSuccess();
                             this._notification.error(`Vous n'êtes pas authentifié.`);
                         } else if (err.status === 403) {

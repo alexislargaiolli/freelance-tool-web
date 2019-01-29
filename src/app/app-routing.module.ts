@@ -12,6 +12,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: 'dashboard', loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard] },
+      { path: 'company', loadChildren: 'app/modules/company/company.module#CompanyModule', canLoad: [AuthGuard] },
       {
         path: '',
         redirectTo: '/dashboard',
@@ -22,12 +23,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

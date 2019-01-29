@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
+import { CompanyRoutingModule } from './company-routing.module';
+import { CompanyFormComponent } from './components/company-form/company-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [CompanyFormComponent],
   imports: [
-    CommonModule
+    SharedModule,
+    FormsModule,
+    CompanyRoutingModule
   ]
 })
 export class CompanyModule { }

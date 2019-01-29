@@ -7,12 +7,19 @@
     grid-template-rows: 64px 1fr;
 }
 
+mat-toolbar {
+    border-bottom: 1px solid #ddd;
+}
+
+mat-sidenav-content {
+    padding: 32px;
+}
+
 @media (max-width: 599px) {
     :host {
         grid-template-rows: 56px 1fr;
     }
-}
-
-mat-toolbar {
-    border-bottom: 1px solid #ddd;
+    mat-sidenav-content {
+        padding: 16px;
+    }
 }

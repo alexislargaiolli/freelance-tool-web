@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
+import { InputAddressComponent } from './components/input-address/input-address.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [InputAddressComponent, InputAddressComponent],
   imports: [
-    CommonModule,
-    MaterialModule
+    CommonModule, MaterialModule, FormsModule
   ],
   exports: [
-    CommonModule,
-    MaterialModule
+    CommonModule, MaterialModule, InputAddressComponent
   ]
 })
 export class SharedModule { }

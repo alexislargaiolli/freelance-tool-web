@@ -25,7 +25,7 @@ export class NotificationService {
     this._notifications$.next(notifs);
   }
 
-  public saveSuccess(message: string) {
+  public saveSuccess(message: string = 'Sauvegarde réussie') {
     return this.add(new Notification(message, NotificationType.SUCCESS, NotificationIcon.SAVE));
   }
 
@@ -57,7 +57,7 @@ export class NotificationService {
     return this.add(new Notification(message, NotificationType.SUCCESS, NotificationIcon.SUCCESS));
   }
 
-  public error(message: string) {
+  public error(message: string = 'Une erreur s\'est produite') {
     return this.add(new Notification(message, NotificationType.ERROR, NotificationIcon.ERROR));
   }
 

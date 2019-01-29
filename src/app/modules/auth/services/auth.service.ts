@@ -29,7 +29,9 @@ export class AuthService {
     public login(username: string, password: string): Observable<AuthResponse> {
         this._authenticating$.next(true);
         const url = `${environment.api_endpoint}${environment.login_endpoint}`;
+        console.log({ username, password });
         return this._http.post<AuthResponse>(url, { username, password }).pipe(
+            tap(console.log),
             tap(response => this.loginSuccess(response)),
             catchError((error: HttpErrorResponse) => {
                 let message = 'Une erreur est survenue.';

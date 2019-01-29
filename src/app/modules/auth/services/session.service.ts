@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { User } from '@models';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { map, takeUntil, filter, pairwise, tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { NotificationService } from 'app/modules/notification/services/notification.service';
@@ -10,7 +10,7 @@ import { NotificationService } from 'app/modules/notification/services/notificat
 })
 export class SessionService {
 
-  private _user$ = new Subject<User>();
+  private _user$ = new BehaviorSubject<User>(null);
 
   constructor(
     private _authService: AuthService,
@@ -28,5 +28,7 @@ export class SessionService {
   }
 
   get user$() { return this._user$.pipe(filter(u => u != null)); }
+
+  get user() { return this._user$.value; }
 
 }
