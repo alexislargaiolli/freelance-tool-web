@@ -5,9 +5,10 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceFormComponent } from './components/invoice-form/invoice-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceFormUserInfoComponent } from './components/invoice-form-user-info/invoice-form-user-info.component';
+import { InvoiceFormCustomerInfoComponent } from './components/invoice-form-customer-info/invoice-form-customer-info.component';
 
 @NgModule({
-  declarations: [InvoiceListComponent, InvoiceFormComponent, InvoiceFormUserInfoComponent],
+  declarations: [InvoiceListComponent, InvoiceFormComponent, InvoiceFormUserInfoComponent, InvoiceFormCustomerInfoComponent],
   imports: [
     SharedModule,
     FormsModule,
