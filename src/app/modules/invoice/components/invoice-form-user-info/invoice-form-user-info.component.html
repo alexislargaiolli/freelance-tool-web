@@ -1,0 +1,29 @@
+<div [formGroup]="parentFormGroup">
+  <mat-form-field>
+    <mat-label>Nom</mat-label>
+    <input matInput
+           formControlName="userName"
+           placeholder="Saisir...">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Téléphone</mat-label>
+    <input matInput
+           formControlName="userPhone"
+           placeholder="Saisir...">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput
+           formControlName="userEmail"
+           placeholder="Saisir...">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Numéro Siret</mat-label>
+    <input matInput
+           formControlName="userSiret"
+           placeholder="Saisir...">
+    <mat-error *ngIf="userSiret.invalid">Doit contenir 14 chiffres</mat-error>
+  </mat-form-field>
+</div>

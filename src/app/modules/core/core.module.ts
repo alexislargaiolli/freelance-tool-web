@@ -6,9 +6,10 @@ import { SharedModule } from '@shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [LoginComponent, LayoutComponent, HeaderComponent, SidenavComponent],
+  declarations: [LoginComponent, LayoutComponent, HeaderComponent, SidenavComponent, ConfirmDialogComponent],
   imports: [
     SharedModule,
     FormsModule,

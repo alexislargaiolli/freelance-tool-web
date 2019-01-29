@@ -1,95 +1,98 @@
-<mat-card class="panel-card"
-          *ngIf="company">
-  <mat-card-header>
-    <mat-card-title>Ma société</mat-card-title>
-  </mat-card-header>
+<app-loading *ngIf="this.loading$ | async; else loadedTemplate"></app-loading>
+<ng-template #loadedTemplate>
+  <mat-card class="panel-card"
+            *ngIf="company">
+    <mat-card-header>
+      <mat-card-title>Ma société</mat-card-title>
+    </mat-card-header>
 
-  <mat-card-content>
-    <form #form="ngForm"
-          (ngSubmit)=onSubmit(form)
-          class="card-form">
-      <mat-form-field>
-        <mat-label>Nom de la société</mat-label>
-        <input matInput
-               name="name"
-               [(ngModel)]="company.name"
-               #name="ngModel"
-               required
-               placeholder="Saisir un nom...">
-        <mat-error *ngIf="name.invalid">Champs requis</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Numéro de Siret</mat-label>
-        <input matInput
-               name="siret"
-               [(ngModel)]="company.siret"
-               #siret="ngModel"
-               required
-               maxlength="14"
-               minlength="14"
-               placeholder="Saisir le numéro de siret...">
-        <mat-error *ngIf="siret.invalid">Le numéro de siret doit contenir 14 chiffres</mat-error>
-      </mat-form-field>
-      <h2>Adresse de facturation</h2>
-      <mat-form-field>
-        <mat-label>Numéro et nom de rue</mat-label>
-        <input matInput
-               name="address1"
-               [(ngModel)]="company.facturationAddress.address1"
-               #address1="ngModel"
-               required
-               placeholder="Saisir...">
-        <mat-error *ngIf="address1.invalid">Champs requis</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Complément d'adresse 1</mat-label>
-        <input matInput
-               name="address2"
-               [(ngModel)]="company.facturationAddress.address2"
-               #address2="ngModel"
-               placeholder="Saisir...">
-        <mat-error *ngIf="address2.invalid">Champs requis</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Complément d'adresse 2</mat-label>
-        <input matInput
-               name="address3"
-               [(ngModel)]="company.facturationAddress.address3"
-               #address3="ngModel"
-               placeholder="Saisir...">
-        <mat-error *ngIf="address3.invalid">Champs requis</mat-error>
-      </mat-form-field>
-      <div>
+    <mat-card-content>
+      <form #form="ngForm"
+            (ngSubmit)=onSubmit(form)
+            class="card-form">
         <mat-form-field>
-          <mat-label>Code postal</mat-label>
+          <mat-label>Nom de la société</mat-label>
           <input matInput
-                 name="postalCode"
-                 [(ngModel)]="company.facturationAddress.postalCode"
-                 #postalCode="ngModel"
+                 name="name"
+                 [(ngModel)]="company.name"
+                 #name="ngModel"
                  required
-                 placeholder="Saisir...">
-          <mat-error *ngIf="postalCode.invalid">Champs requis</mat-error>
+                 placeholder="Saisir un nom...">
+          <mat-error *ngIf="name.invalid">Champs requis</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Ville</mat-label>
+          <mat-label>Numéro de Siret</mat-label>
           <input matInput
-                 name="city"
-                 [(ngModel)]="company.facturationAddress.city"
-                 #city="ngModel"
+                 name="siret"
+                 [(ngModel)]="company.siret"
+                 #siret="ngModel"
+                 required
+                 maxlength="14"
+                 minlength="14"
+                 placeholder="Saisir le numéro de siret...">
+          <mat-error *ngIf="siret.invalid">Le numéro de siret doit contenir 14 chiffres</mat-error>
+        </mat-form-field>
+        <h2>Adresse de facturation</h2>
+        <mat-form-field>
+          <mat-label>Numéro et nom de rue</mat-label>
+          <input matInput
+                 name="address1"
+                 [(ngModel)]="company.facturationAddress.address1"
+                 #address1="ngModel"
                  required
                  placeholder="Saisir...">
-          <mat-error *ngIf="city.invalid">Champs requis</mat-error>
+          <mat-error *ngIf="address1.invalid">Champs requis</mat-error>
         </mat-form-field>
-      </div>
-      <div class="actions">
-        <button type="button"
-                mat-button
-                (click)="form.reset()">Annuler</button>
-        <button type="submit"
-                [disabled]="form.invalid || form.pristine"
-                class="green"
-                mat-button>Valider</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+        <mat-form-field>
+          <mat-label>Complément d'adresse 1</mat-label>
+          <input matInput
+                 name="address2"
+                 [(ngModel)]="company.facturationAddress.address2"
+                 #address2="ngModel"
+                 placeholder="Saisir...">
+          <mat-error *ngIf="address2.invalid">Champs requis</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Complément d'adresse 2</mat-label>
+          <input matInput
+                 name="address3"
+                 [(ngModel)]="company.facturationAddress.address3"
+                 #address3="ngModel"
+                 placeholder="Saisir...">
+          <mat-error *ngIf="address3.invalid">Champs requis</mat-error>
+        </mat-form-field>
+        <div>
+          <mat-form-field>
+            <mat-label>Code postal</mat-label>
+            <input matInput
+                   name="postalCode"
+                   [(ngModel)]="company.facturationAddress.postalCode"
+                   #postalCode="ngModel"
+                   required
+                   placeholder="Saisir...">
+            <mat-error *ngIf="postalCode.invalid">Champs requis</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Ville</mat-label>
+            <input matInput
+                   name="city"
+                   [(ngModel)]="company.facturationAddress.city"
+                   #city="ngModel"
+                   required
+                   placeholder="Saisir...">
+            <mat-error *ngIf="city.invalid">Champs requis</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="actions">
+          <button type="button"
+                  mat-button
+                  (click)="form.reset()">Annuler</button>
+          <button type="submit"
+                  [disabled]="form.invalid || form.pristine"
+                  class="green"
+                  mat-button>Valider</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

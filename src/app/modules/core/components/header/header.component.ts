@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = this._session.user$;
-    this.user$.subscribe(console.log);
   }
 
 }

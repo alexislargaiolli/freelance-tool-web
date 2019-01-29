@@ -4,8 +4,10 @@ import {
   MatSidenavModule,
   MatListModule,
   MatToolbarModule,
-  MatCardModule
+  MatCardModule,
+  MatDialogModule
 } from '@angular/material';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   declarations: [],
@@ -13,13 +15,13 @@ import {
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule
+    MatCardModule, CdkTableModule, MatDialogModule
   ],
   exports: [
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule
+    MatCardModule, CdkTableModule, MatDialogModule
   ]
 })
 export class MaterialModule { }

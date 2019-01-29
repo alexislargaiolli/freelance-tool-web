@@ -30,11 +30,13 @@ body {
 
 .mat-card.panel-card {
     max-width: 1024px;
+    margin: 16px;
     &::ng-deep .mat-card-header .mat-card-header-text {
         margin: 0;
     }
     @media (min-width: 600px) {
         display: inline-block;
         min-width: 500px;
+        margin: 32px;
     }
 }

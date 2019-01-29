@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Company, Address } from '@models';
-import { UserCompanyService } from '@core/services/user-company.service';
+import { UserCompaniesService } from '@core/services/user-companies.service';
 import { DestroyObservable } from 'app/common/destroy-observable';
 import { takeUntil } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
 import { NotificationService } from '@notification/services/notification.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-company-form',
@@ -13,11 +14,13 @@ import { NotificationService } from '@notification/services/notification.service
 })
 export class CompanyFormComponent extends DestroyObservable implements OnInit {
 
+  loading$: Observable<boolean>;
   company: Company;
 
-  constructor(private _companyService: UserCompanyService, private _notifService: NotificationService) { super(); }
+  constructor(private _companyService: UserCompaniesService, private _notifService: NotificationService) { super(); }
 
   ngOnInit() {
+    this.loading$ = this._companyService.loading$;
     this._companyService.currentCompany$.pipe(takeUntil(this.destroy$)).subscribe(c => {
       this.company = { ...c };
       if (this.company.facturationAddress == null) {

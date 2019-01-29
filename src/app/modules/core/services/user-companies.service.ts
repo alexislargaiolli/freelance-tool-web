@@ -9,21 +9,16 @@ import { AuthService } from '@auth/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserCompanyService extends APIModelRepository<Company> {
+export class UserCompaniesService extends APIModelRepository<Company> {
 
   private _currentCompanyId$ = new BehaviorSubject<number>(null);
   private _currentCompany$: Observable<Company>;
   public get currentCompany$(): Observable<Company> { return this._currentCompany$; }
 
-  constructor(protected _httpClient: HttpClient, private _authService: AuthService) {
+  constructor(protected _httpClient: HttpClient) {
     super(_httpClient, '/me/companies');
     const currentId$ = this._currentCompanyId$.pipe(filter(id => id != null));
     this._currentCompany$ = combineLatest(this._items$, currentId$, (items, id) => items.get(id));
-    this._authService.authenticated$.subscribe(authenticated => {
-      if (authenticated) {
-        this.load().subscribe();
-      }
-    });
   }
 
   load() {

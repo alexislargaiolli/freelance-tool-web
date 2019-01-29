@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, tap, pairwise, filter } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material';
-import { UserCompanyService } from '@core/services/user-company.service';
+import { UserCompaniesService } from '@core/services/user-companies.service';
 
 @Component({
   selector: 'app-layout',
@@ -20,7 +20,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private _breakpointObserver: BreakpointObserver,
     // Inject invoke contructor and trigger loads
-    private _userCompanyService: UserCompanyService
+    private _userCompanyService: UserCompaniesService
   ) { }
 
   ngOnInit() {
