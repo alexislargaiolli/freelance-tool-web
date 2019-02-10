@@ -2,6 +2,7 @@ import { APIModel } from '@models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export abstract class APIModelService<T extends APIModel> {
     public static readonly DEFAULT_PAGINATION_SIZE = 20;
@@ -20,20 +21,20 @@ export abstract class APIModelService<T extends APIModel> {
         return this._httpClient.get<T[]>(url);
     }
 
-    public loadOne(id: number, url: string = this._url): Observable<T> {
-        return this._httpClient.get<T>(`${url}/${id}`);
+    public loadOne(id: number, url: string = `${this._url}/${id}`): Observable<T> {
+        return this._httpClient.get<T>(url);
     }
 
-    public update(item: T, url: string = this._url): Observable<T> {
-        return this._httpClient.put<T>(`${url}/${item.id}`, item);
+    public update(item: T, url: string = `${this._url}/${item.id}`): Observable<T> {
+        return this._httpClient.put<T>(url, item);
     }
 
-    public patch(id: number, attributes: { [name: string]: any }, url: string = this._url): Observable<T> {
-        return this._httpClient.patch<T>(`${url}/${id}`, attributes);
+    public patch(id: number, attributes: { [name: string]: any }, url: string = `${this._url}/${id}`): Observable<T> {
+        return this._httpClient.patch<T>(url, attributes);
     }
 
-    public delete(id: number, url: string = this._url): Observable<T> {
-        return this._httpClient.delete<T>(`${url}/${id}`);
+    public delete(id: number, url: string = `${this._url}/${id}`): Observable<number> {
+        return this._httpClient.delete(url).pipe(map(() => id));
     }
 
     public save(item: T, url: string = this._url): Observable<T> {

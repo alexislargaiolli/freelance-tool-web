@@ -1,4 +1,6 @@
-<div [formGroup]="parentFormGroup">
+<h2>Mes coordonnées</h2>
+<div [formGroup]="parentFormGroup"
+     class="form-group">
   <mat-form-field>
     <mat-label>Nom</mat-label>
     <input matInput
@@ -10,6 +12,7 @@
     <input matInput
            formControlName="userPhone"
            placeholder="Saisir...">
+    <mat-error *ngIf="userPhone.invalid">Numéro de téléphone invalide</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -17,6 +20,7 @@
     <input matInput
            formControlName="userEmail"
            placeholder="Saisir...">
+    <mat-error *ngIf="userEmail.invalid">Adresse email invalide</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -26,4 +30,6 @@
            placeholder="Saisir...">
     <mat-error *ngIf="userSiret.invalid">Doit contenir 14 chiffres</mat-error>
   </mat-form-field>
+
+  <app-input-address [parentFormGroup]="userFacturationAddress"></app-input-address>
 </div>

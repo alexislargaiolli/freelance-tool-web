@@ -1,0 +1,59 @@
+<form [formGroup]="formArray"
+      class="page-form">
+
+  <div *ngFor="let group of formArray.controls; let i=index"
+       [formGroupName]="i"
+       class="form-group full-width">
+
+    <mat-form-field>
+      <mat-label>Label</mat-label>
+      <input matInput
+             formControlName="label"
+             required
+             placeholder="Saisir un label...">
+      <mat-error *ngIf="group.controls.label.invalid">Champs requis</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Quantité</mat-label>
+      <input matInput
+             type="number"
+             formControlName="quantity"
+             required
+             placeholder="Saisir une quantité...">
+      <mat-error *ngIf="group.controls.quantity.invalid">Champs requis</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prix unitaire</mat-label>
+      <input matInput
+             type="number"
+             formControlName="unitPrice"
+             required
+             placeholder="Saisir un prix...">
+      <mat-error *ngIf="group.controls.unitPrice.invalid">Champs requis</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Prix total</mat-label>
+      <input matInput
+             type="number"
+             formControlName="totalPrice"
+             required
+             placeholder="Saisir un prix total...">
+      <mat-error *ngIf="group.controls.totalPrice.invalid">Champs requis</mat-error>
+    </mat-form-field>
+
+    <button mat-icon-button
+            (click)="removeItem(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="actions">
+    <button (click)="createItem()"
+            [disabled]="creating$ | async"
+            mat-button>Ajouter une ligne</button>
+  </div>
+
+</form>

@@ -1,0 +1,7 @@
+.form-group {
+    flex: 1;
+    mat-form-field:first-child {
+        flex: 4;
+        max-width: 500px;
+    }
+}

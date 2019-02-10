@@ -40,3 +40,32 @@ body {
         margin: 32px;
     }
 }
+
+.page-form {
+    margin: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    @media (min-width: 600px) {
+        margin: 32px;
+    }
+    .actions,
+    .full-width {
+        min-width: 100%;
+    }
+    h2 {
+        font-weight: 400;
+        color: #222;
+        font-size: 20px;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    .mat-form-field {
+        flex: 1;
+        margin: 0 10px;
+        max-width: 200px;
+    }
+}

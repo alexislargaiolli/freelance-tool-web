@@ -1,38 +1,31 @@
-<mat-form-field>
-  <mat-label>Numéro et nom de rue</mat-label>
-  <input matInput
-         name="address1"
-         [ngModel]="address.address1"
-         #address1="ngModel"
-         required
-         placeholder="Saisir...">
-  <mat-error *ngIf="address1.invalid">Champs requis</mat-error>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Complément d'adresse 1</mat-label>
-  <input matInput
-         name="address2"
-         [ngModel]="address.address2"
-         #address2="ngModel"
-         placeholder="Saisir...">
-  <mat-error *ngIf="address2.invalid">Champs requis</mat-error>
-</mat-form-field>
-<mat-form-field>
-  <mat-label>Complément d'adresse 2</mat-label>
-  <input matInput
-         name="address3"
-         [ngModel]="address.address3"
-         #address3="ngModel"
-         placeholder="Saisir...">
-  <mat-error *ngIf="address3.invalid">Champs requis</mat-error>
-</mat-form-field>
-<div>
+<div [formGroup]="parentFormGroup"
+     class="form-group">
+  <mat-form-field>
+    <mat-label>Numéro et nom de rue</mat-label>
+    <input matInput
+           formControlName="address1"
+           required
+           placeholder="Saisir...">
+    <mat-error *ngIf="address1.invalid">Champs requis</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Complément d'adresse 1</mat-label>
+    <input matInput
+           formControlName="address2"
+           placeholder="Saisir...">
+    <mat-error *ngIf="address2.invalid">Champs requis</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Complément d'adresse 2</mat-label>
+    <input matInput
+           formControlName="address3"
+           placeholder="Saisir...">
+    <mat-error *ngIf="address3.invalid">Champs requis</mat-error>
+  </mat-form-field>
   <mat-form-field>
     <mat-label>Code postal</mat-label>
     <input matInput
-           name="postalCode"
-           [ngModel]="address.postalCode"
-           #postalCode="ngModel"
+           formControlName="postalCode"
            required
            placeholder="Saisir...">
     <mat-error *ngIf="postalCode.invalid">Champs requis</mat-error>
@@ -40,9 +33,7 @@
   <mat-form-field>
     <mat-label>Ville</mat-label>
     <input matInput
-           name="city"
-           [ngModel]="address.city"
-           #city="ngModel"
+           formControlName="city"
            required
            placeholder="Saisir...">
     <mat-error *ngIf="city.invalid">Champs requis</mat-error>

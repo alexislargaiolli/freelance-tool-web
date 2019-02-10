@@ -5,7 +5,8 @@ import {
   MatListModule,
   MatToolbarModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -15,13 +16,13 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule, CdkTableModule, MatDialogModule
+    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule
   ],
   exports: [
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule, CdkTableModule, MatDialogModule
+    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule
   ]
 })
 export class MaterialModule { }

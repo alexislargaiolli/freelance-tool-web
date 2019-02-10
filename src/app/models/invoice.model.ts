@@ -30,4 +30,6 @@ export interface Invoice extends AbstractDocument {
     state?: InvoiceState;
 
     invoiceItems?: InvoiceItem[];
+
+    user?: { id: number };
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth/services/auth.service';
 import { SessionService } from '@auth/services/session.service';
 import { AppUpdateService } from '@core/services/app-update.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._authService.checkAutoLogin();
+    this._authService.checkAutoLogin().pipe(take(1)).subscribe();
   }
 
 }

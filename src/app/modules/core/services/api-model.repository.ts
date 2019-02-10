@@ -1,6 +1,6 @@
 import { APIModel } from '@models';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, finalize } from 'rxjs/operators';
 import { APIModelService } from './api-model.service';
 
 export abstract class APIModelRepository<T extends APIModel> extends APIModelService<T> {
@@ -43,6 +43,15 @@ export abstract class APIModelRepository<T extends APIModel> extends APIModelSer
         this._items$.next(this._items$.value);
     }
 
+    protected mergeItem(id: number, attributes: { [key: string]: any }) {
+        const item = this._items$.value.get(id);
+        for (const [name, value] of Object.entries(attributes)) {
+            item[name] = value;
+        }
+        this._items$.value.set(id, item);
+        this._items$.next(this._items$.value);
+    }
+
     protected setItems(items: T[]) {
         for (const item of items) {
             this._items$.value.set(item.id, item);
@@ -70,68 +79,68 @@ export abstract class APIModelRepository<T extends APIModel> extends APIModelSer
         this._itemsDeleting$.next(this._itemsDeleting$.value);
     }
 
-    public create(item: T, url: string = this._url): Observable<T> {
+    public create(item: T, url?: string): Observable<T> {
         this._creating$.next(true);
         return super.create(item, url).pipe(
             tap(res => {
                 this.setItem(res);
-                this._creating$.next(false);
-            })
+            }),
+            finalize(() => this._creating$.next(false))
         );
     }
 
-    public load(url: string = this._url): Observable<T[]> {
+    public load(url?: string): Observable<T[]> {
         this._loading$.next(true);
         return super.load(url).pipe(
             tap(res => {
                 this.setItems(res);
-                this._loading$.next(false);
                 this._loaded$.next(true);
-            })
+            }),
+            finalize(() => this._loading$.next(false))
         );
     }
 
-    public loadOne(id: number, url: string = this._url): Observable<T> {
+    public loadOne(id: number, url?: string): Observable<T> {
         this.setLoading(id, true);
         return super.loadOne(id, url).pipe(
             tap(res => {
                 this.setItem(res);
-                this.setLoading(id, false);
-            })
+            }),
+            finalize(() => this.setLoading(id, false))
         );
     }
 
-    public update(item: T, url: string = this._url): Observable<T> {
+    public update(item: T, url?: string): Observable<T> {
         this.setUpdating(item.id, true);
         return super.update(item, url).pipe(
             tap(res => {
                 this.setItem(res);
-                this.setUpdating(item.id, false);
-            })
+            }),
+            finalize(() => this.setUpdating(item.id, false))
         );
     }
 
-    public patch(id: number, attributes: { [name: string]: any }, url: string = this._url): Observable<T> {
+    public patch(id: number, attributes: { [name: string]: any }, url?: string): Observable<T> {
         this.setUpdating(id, true);
         return super.patch(id, attributes, url).pipe(
             tap(res => {
-                this.setItem(res);
-                this.setUpdating(id, false);
-            })
+                this.mergeItem(id, res);
+            }),
+            finalize(() => this.setUpdating(id, false))
         );
     }
 
-    public delete(id: number, url: string = this._url): Observable<T> {
+    public delete(id: number, url?: string): Observable<number> {
         this.setDeleting(id, true);
         return super.delete(id, url).pipe(
             tap(res => {
-                this.removeItem(res.id);
-                this.setDeleting(id, false);
-            })
+                this.removeItem(id);
+            }),
+            finalize(() => this.setDeleting(id, false))
         );
     }
 
-    public save(item: T, url: string = this._url): Observable<T> {
+    public save(item: T, url?: string): Observable<T> {
         if (item.id) {
             return this.update(item, url);
         }

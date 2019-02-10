@@ -4,18 +4,44 @@
 </mat-toolbar>
 
 <form [formGroup]="form"
-      *ngIf="invoice">
+      *ngIf="form"
+      class="page-form">
 
-  <mat-form-field>
-    <mat-label>Titre de la facture</mat-label>
-    <input matInput
-           formControlName="title"
-           required
-           placeholder="Saisir un titre...">
-    <mat-error *ngIf="title.invalid">Champs requis</mat-error>
-  </mat-form-field>
+  <div class="form-group full-width">
+    <mat-form-field>
+      <mat-label>Titre de la facture</mat-label>
+      <input matInput
+             formControlName="title"
+             required
+             placeholder="Saisir un titre...">
+      <mat-error *ngIf="title.invalid">Champs requis</mat-error>
+    </mat-form-field>
 
-  <h2>Mes coordonnées</h2>
+    <mat-form-field>
+      <mat-label>Statut</mat-label>
+      <mat-select placeholder="Sélectionner un status"
+                  formControlName="state">
+        <mat-option *ngFor="let state of InvoiceState | values"
+                    [value]="state">
+          {{state}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <app-invoice-form-user-info [parentFormGroup]="form"></app-invoice-form-user-info>
-  <app-invoice-form-customer-info></app-invoice-form-customer-info>
+
+  <app-invoice-form-customer-info [parentFormGroup]="form"></app-invoice-form-customer-info>
+
+  <div class="actions">
+    <button (click)="saveInvoice()"
+            type="submit"
+            mat-button>Valider</button>
+  </div>
+
 </form>
+
+<app-invoice-item-form #invoiceItemForm
+                       [invoiceId]="invoiceId$ | async">
+
+</app-invoice-item-form>
