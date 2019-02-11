@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { NotificationService } from 'app/modules/notification/services/notification.service';
 import { BehaviorSubject, Observable, Subject, throwError, of } from 'rxjs';
-import { catchError, finalize, map, tap } from 'rxjs/operators';
+import { catchError, finalize, map, tap, mergeMap } from 'rxjs/operators';
 import { AuthResponse } from '../models/auth.response.model';
 import { User } from '@models';
 
@@ -32,6 +32,12 @@ export class AuthService {
         this._authenticating$.next(true);
         const url = `${environment.api_endpoint}${environment.login_endpoint}`;
         return this._http.post<AuthResponse>(url, { username, password }).pipe(
+            mergeMap(response => {
+                if (response.token == null) {
+                    return throwError({ status: 401 });
+                }
+                return of(response);
+            }),
             tap(response => this.setToken(response.token)),
             tap(response => this.loginSuccess(response)),
             catchError((error: HttpErrorResponse) => {
