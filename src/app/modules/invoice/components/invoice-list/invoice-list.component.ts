@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material';
 import { DestroyObservable } from 'app/common/destroy-observable';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NotificationService } from '@notification/services/notification.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -17,7 +18,7 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
   dataSource = new MatTableDataSource<Invoice>();
   creating$: Observable<boolean>;
 
-  constructor(private _invoicesService: UserInvoicesService, private _router: Router) {
+  constructor(private _invoicesService: UserInvoicesService, private _router: Router, private _notifService: NotificationService) {
     super();
   }
 
@@ -27,7 +28,10 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
   }
 
   createInvoice() {
-    this._invoicesService.create({ title: 'Nouvelle facture' }).subscribe();
+    this._invoicesService.create({ title: 'Nouvelle facture' }).subscribe(
+      () => this._notifService.success('Facture créée'),
+      () => this._notifService.error()
+    );
   }
 
   selectInvoice(invoice: Invoice) {

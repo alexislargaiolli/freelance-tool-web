@@ -1,9 +1,9 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '@models';
-import { Subject, BehaviorSubject } from 'rxjs';
-import { map, takeUntil, filter, pairwise, tap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { NotificationService } from 'app/modules/notification/services/notification.service';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map, pairwise } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,9 @@ export class SessionService {
     private _authService: AuthService,
     private _notificationService: NotificationService
   ) {
+  }
 
+  initialize() {
     this._user$.pipe(
       pairwise(),
       filter(([previous, current]) => previous == null && current != null),

@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "https://freelance-tool-api.herokuapp.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": "/"
+        }
+    }
+}
