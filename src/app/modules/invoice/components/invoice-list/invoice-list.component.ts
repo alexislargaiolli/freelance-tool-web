@@ -28,7 +28,14 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
   }
 
   createInvoice() {
-    this._invoicesService.create({ title: 'Nouvelle facture', userFacturationAddress: {}, customerFacturationAddress: {} }).subscribe(
+    const invoice = {
+      title: 'Nouvelle facture',
+      code: `${this.dataSource.data.length + 1}`,
+      userFacturationAddress: {},
+      customerFacturationAddress: {},
+      invoiceItems: []
+    };
+    this._invoicesService.create(invoice).subscribe(
       () => this._notifService.success('Facture créée'),
       () => this._notifService.error()
     );
