@@ -54,19 +54,14 @@
 
   <app-invoice-form-customer-info [parentFormGroup]="form"></app-invoice-form-customer-info>
 
-  <div class="actions">
-    <button (click)="saveInvoice()"
-            type="submit"
-            mat-button>Valider</button>
-  </div>
-
   <app-invoice-item-form #invoiceItemForm
                          [formArray]="invoiceItems"
                          (create)="createItem()"
                          (delete)="removeItem($event)">
   </app-invoice-item-form>
 
-  <div>
+  <h2>Montants</h2>
+  <div class="form-group full-width">
     <mat-form-field *ngIf="tvaActive.value">
       <mat-label>Total HT</mat-label>
       <input matInput

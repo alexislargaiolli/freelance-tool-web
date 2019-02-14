@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DestroyObservable } from '@common/destroy-observable';
+import { validateAllFormFields } from '@common/form-utils';
 import { InvoicesService } from '@core/services/invoices.service';
 import { Address, Invoice, InvoiceItem, InvoiceState } from '@models';
 import { NotificationService } from '@notification/services/notification.service';
-import { DestroyObservable } from 'app/common/destroy-observable';
-import { getModifiedFields, validateAllFormFields } from 'app/common/form-utils';
-import { combineLatest, Observable, merge } from 'rxjs';
-import { filter, map, startWith, takeUntil, skip } from 'rxjs/operators';
+import { combineLatest, merge, Observable } from 'rxjs';
+import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoice-form',
@@ -84,7 +84,6 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       );
     } else {
       validateAllFormFields(this.form);
-      // this.validateAllFormFields(this.invoiceItemForm.formArray);
     }
   }
 

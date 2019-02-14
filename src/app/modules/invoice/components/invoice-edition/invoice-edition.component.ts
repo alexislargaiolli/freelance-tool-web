@@ -37,7 +37,9 @@ export class InvoiceEditionComponent extends DestroyObservable implements OnInit
       takeUntil(this.destroy$),
       map(result => result.matches),
     ).subscribe((isLarge) => {
-      if (!isLarge && this.viewMode === InvoiceViewMode.SPLIT) {
+      if (isLarge) {
+        this._viewMode.next(InvoiceViewMode.SPLIT);
+      } else if (this.viewMode === InvoiceViewMode.SPLIT) {
         this._viewMode.next(InvoiceViewMode.FORM);
       }
     });

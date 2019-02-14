@@ -34,6 +34,9 @@
       "@shared/*": [
         "app/modules/shared/*"
       ],
+      "@common/*": [
+        "app/common/*"
+      ],
       "@notification/*": [
         "app/modules/notification/*"
       ],

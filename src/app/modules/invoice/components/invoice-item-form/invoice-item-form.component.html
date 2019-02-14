@@ -1,6 +1,5 @@
-<div [formGroup]="formArray"
-     class="page-form">
-
+<div [formGroup]="formArray">
+  <h2>Prestations</h2>
   <div *ngFor="let group of formArray.controls; let i=index"
        [formGroupName]="i"
        class="form-group full-width">

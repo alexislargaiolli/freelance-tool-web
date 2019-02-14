@@ -6,7 +6,7 @@ export function validateAllFormFields(formGroup: FormGroup | FormArray) {
         if (control instanceof FormControl) {
             control.markAsTouched({ onlySelf: true });
         } else if (control instanceof FormGroup) {
-            this.validateAllFormFields(control);
+            validateAllFormFields(control);
         }
     });
 }
