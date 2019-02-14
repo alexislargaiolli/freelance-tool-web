@@ -1,0 +1,83 @@
+<div class="header"
+     *ngIf="invoice">
+  <div class="header-info">
+    <div class="code">N° {{invoice.code}}</div>
+    <div class="creation-date">{{invoice.createdDate | date:'mediumDate'}}</div>
+    <div class="validity-date">À payer avant le {{invoice.validityDate | date}}</div>
+  </div>
+  <div class="header-spacer"></div>
+  <div class="header-type">
+    <span class="big-title">FACTURE</span>
+  </div>
+</div>
+<div class="header-separator"></div>
+<div class="content"
+     *ngIf="invoice">
+  <div class="contact-info-wrapper">
+    <div>
+      <div class="name">{{invoice.userName}}</div>
+      <div class="siret">SIRET {{invoice.userSiret}}</div>
+      <div class="tva-identifier"
+           *ngIf="invoice.tvaIdentifier">N° TVA Intra {{invoice.tvaIdentifier}}</div>
+      <div class="address1">{{invoice.userFacturationAddress?.address1}}</div>
+      <div class="address2">{{invoice.userFacturationAddress?.address2}}</div>
+      <div class="city">{{invoice.userFacturationAddress?.zipcode}} {{invoice.userFacturationAddress?.city}}</div>
+    </div>
+    <div>
+      <div class="name">{{invoice.customerName}}</div>
+      <div class="address1">{{invoice.customerFacturationAddress?.address1}}</div>
+      <div class="address2">{{invoice.customerFacturationAddress?.address2}}</div>
+      <div class="city">{{invoice.customerFacturationAddress?.zipcode}}
+        {{invoice.customerFacturationAddress?.city}}</div>
+    </div>
+  </div>
+  <div class="title">
+    {{invoice.title}}
+  </div>
+  <div class="invoice-items-header">
+    <div>Libellé</div>
+    <div>Prix unitaire TTC</div>
+    <div>Quantité</div>
+    <div>Unité</div>
+    <div>TOTAL TTC</div>
+  </div>
+  <div class="invoice-items">
+    <ng-container *ngFor="let line of invoice.invoiceItems">
+      <!-- <div class="content"
+         [innerHtml]="line.content | devisLine"></div> -->
+      <div class="invoice-item-label">{{line.label}}</div>
+      <div [hidden]="line.totalPrice == null">{{line.unitPrice | currency:'EUR'}}</div>
+      <div [hidden]="line.totalPrice == null">{{line.quantity}}</div>
+      <div [hidden]="line.totalPrice == null">jour</div>
+      <div [hidden]="line.totalPrice == null">{{line.totalPrice | currency:'EUR'}}</div>
+    </ng-container>
+  </div>
+
+  <div class="total">
+    <div class="total-header"
+         *ngIf="!invoice.tvaActive">MONTANT À PAYER</div>
+    <div class="total-label">TOTAL</div>
+    <div class="total-price">{{invoice.amountDutyFree | currency:'EUR' }}</div>
+    <ng-container *ngIf="invoice.tvaActive">
+      <div class="total-label">TVA</div>
+      <div class="total-price">{{invoice.tvaAmount | currency:'EUR'}}</div>
+      <div class="total-label total-net">TOTAL NET</div>
+      <div class="total-price total-net">{{invoice.amount | currency:'EUR'}}</div>
+    </ng-container>
+  </div>
+</div>
+<div class="footer"
+     *ngIf="invoice">
+  <div class="footer-contact-info">
+    <div *ngIf="invoice.userPhone">
+      <mat-icon>contact_phone</mat-icon>
+      <div>{{invoice.userPhone}}</div>
+    </div>
+    <div *ngIf="invoice.userEmail">
+      <mat-icon>contact_mail</mat-icon>
+      <div>{{invoice.userEmail}}</div>
+    </div>
+  </div>
+  <p *ngIf="!invoice.tvaActive">Dispensé d'immatriculation au registre du commerce et des sociétés et au répertoire des
+    métiers</p>
+</div>

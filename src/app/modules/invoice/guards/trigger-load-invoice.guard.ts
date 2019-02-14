@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserInvoicesService } from '@core/services/user-invoices.service';
+import { InvoicesService } from '@core/services/invoices.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TriggerLoadInvoiceGuard implements CanActivate {
 
-  constructor(private _invoices: UserInvoicesService) { }
+  constructor(private _invoices: InvoicesService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,

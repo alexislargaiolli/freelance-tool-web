@@ -16,9 +16,15 @@ export abstract class APIModelRepository<T extends APIModel> extends APIModelSer
     get items$(): Observable<T[]> {
         return this._items$.pipe(map(m => Array.from(m.values())));
     }
+    get items(): T[] {
+        return Array.from(this._items$.value.values());
+    }
     get loading$(): Observable<boolean> { return this._loading$; }
+    get loading(): boolean { return this._loading$.value; }
     get creating$(): Observable<boolean> { return this._creating$; }
+    get creating(): boolean { return this._creating$.value; }
     get loaded$(): Observable<boolean> { return this._loaded$; }
+    get loaded(): boolean { return this._loaded$.value; }
 
     item$(id$: Observable<number>): Observable<T> {
         return combineLatest(id$, this._items$, (id, items) => {

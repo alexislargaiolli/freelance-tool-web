@@ -7,10 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvoiceFormUserInfoComponent } from './components/invoice-form-user-info/invoice-form-user-info.component';
 import { InvoiceFormCustomerInfoComponent } from './components/invoice-form-customer-info/invoice-form-customer-info.component';
 import { InvoiceItemFormComponent } from './components/invoice-item-form/invoice-item-form.component';
+import { InvoicePreviewComponent } from './components/invoice-preview/invoice-preview.component';
+import { InvoiceEditionComponent } from './components/invoice-edition/invoice-edition.component';
 
 @NgModule({
   declarations: [
-    InvoiceListComponent, InvoiceFormComponent, InvoiceFormUserInfoComponent, InvoiceFormCustomerInfoComponent, InvoiceItemFormComponent
+    InvoiceListComponent, InvoiceFormComponent, InvoiceFormUserInfoComponent, InvoiceFormCustomerInfoComponent, InvoiceItemFormComponent,
+    InvoicePreviewComponent, InvoiceEditionComponent
   ],
   imports: [
     SharedModule,

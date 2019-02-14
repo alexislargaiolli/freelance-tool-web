@@ -71,10 +71,12 @@ export class AuthService {
     }
 
     public logout() {
-        const url = `${environment.api_endpoint}/${environment.logout_endpoint}`;
-        return this._http.get(url).pipe(
-            tap(() => this.logoutSuccess()),
-        );
+        // const url = `${environment.api_endpoint}/${environment.logout_endpoint}`;
+        // return this._http.get(url).pipe(
+        //     tap(() => this.logoutSuccess()),
+        // );
+        this.logoutSuccess();
+        return of(true);
     }
 
     public logoutSuccess() {

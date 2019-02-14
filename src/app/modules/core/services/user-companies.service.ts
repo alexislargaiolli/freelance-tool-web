@@ -1,31 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Company } from '@models';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 import { APIModelRepository } from './api-model.repository';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
-import { AuthService } from '@auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserCompaniesService extends APIModelRepository<Company> {
 
-  private _currentCompanyId$ = new BehaviorSubject<number>(null);
-  private _currentCompany$: Observable<Company>;
+  private _currentCompany$ = new BehaviorSubject<Company>(null);
   public get currentCompany$(): Observable<Company> { return this._currentCompany$; }
+  public get currentCompany(): Company { return this._currentCompany$.value; }
 
   constructor(protected _httpClient: HttpClient) {
     super(_httpClient, '/me/companies');
-    const currentId$ = this._currentCompanyId$.pipe(filter(id => id != null));
-    this._currentCompany$ = combineLatest(this._items$, currentId$, (items, id) => items.get(id));
   }
 
   load() {
     return super.load(`${this._url}?join=facturationAddress`).pipe(
       tap(companies => {
         if (companies.length > 0) {
-          this._currentCompanyId$.next(companies[0].id);
+          this._currentCompany$.next(companies[0]);
         }
       })
     );

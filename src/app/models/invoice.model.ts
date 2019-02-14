@@ -31,5 +31,7 @@ export interface Invoice extends AbstractDocument {
 
     invoiceItems?: InvoiceItem[];
 
-    user?: { id: number };
+    companyId?: number;
+
+    company?: { id: number };
 }

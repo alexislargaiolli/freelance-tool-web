@@ -6,7 +6,12 @@ import {
   MatToolbarModule,
   MatCardModule,
   MatDialogModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatButtonToggleModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -16,13 +21,17 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule
+    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule,
+    MatSlideToggleModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule,
+    MatButtonToggleModule
   ],
   exports: [
     MatButtonModule, MatTableModule, MatFormFieldModule,
     MatInputModule, MatIconModule, MatSortModule, MatProgressBarModule,
     MatMenuModule, MatSidenavModule, MatListModule, MatToolbarModule,
-    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule
+    MatCardModule, CdkTableModule, MatDialogModule, MatSelectModule,
+    MatSlideToggleModule, MatCheckboxModule, MatDatepickerModule,
+    MatButtonToggleModule
   ]
 })
 export class MaterialModule { }

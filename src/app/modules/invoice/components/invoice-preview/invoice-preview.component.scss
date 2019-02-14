@@ -1,0 +1,208 @@
+$title-color:#4d4d4d;
+$title-size:22px;
+$font-title: 'Oswald',
+sans-serif;
+$font-text: 'Lato',
+sans-serif;
+$c1: #E1E1E1;
+$c2:#575E61;
+$c3: #E1E1E1;
+$primary-color:$c2;
+$secondary-color:$c3;
+$title-bg:$secondary-color;
+$title-text:#444;
+$header-left-bg:$primary-color;
+$header-left-text:#fff;
+$header-right-bg: $secondary-color;
+$header-right-text: #fff;
+$line-header-bg: $primary-color;
+$line-header-text:#fff;
+$line-item-bg:$c1;
+$line-item-text: #444;
+$footer-bg: $secondary-color;
+$footer-text: #444;
+:host {
+    // Original 800 * 1117
+    width: 800px;
+    height: 1117px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #444;
+    font-family: $font-text;
+}
+
+.header {
+    background: $header-right-bg;
+    height: 65px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .header-info {
+        font-size: 12px;
+        background: $header-left-bg;
+        color: $header-left-text;
+        font-family: $font-title;
+        height: 100%;
+        padding: 0 60px 0 50px;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .header-spacer {
+        border-bottom: 100px solid $header-right-bg;
+        border-left: 50px solid transparent;
+        border-right: 0px solid transparent;
+        height: 0;
+        width: 100px;
+        margin-left: -42px;
+    }
+    .header-type {
+        flex: 1;
+        height: 65px;
+        text-align: right;
+        .big-title {
+            font-size: 92px;
+            line-height: 60px;
+            color: $header-right-text;
+        }
+    }
+}
+
+.header-separator {
+    background: #ccc;
+    height: 1px;
+}
+
+.content {
+    padding: 50px;
+    flex: 1;
+    .contact-info-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .name {
+            font-family: $font-title;
+            color: $title-color;
+            font-size: $title-size;
+        }
+        .tva-identifier,
+        .street,
+        .siret,
+        .address2,
+        .city {
+            color: $title-color;
+            font-size: 13px;
+        }
+    }
+    .title {
+        background: $title-bg;
+        color: $title-text;
+        padding: 8px;
+        font-family: $font-title;
+        font-size: 18px;
+        text-align: center;
+        margin: 40px -50px;
+    }
+    .invoice-items,
+    .invoice-items-header {
+        display: grid;
+        grid-template-columns: 1fr 70px 70px 70px 120px;
+    }
+    .invoice-items-header {
+        &>div {
+            background: $line-header-bg;
+            font-family: $font-title;
+            color: $line-header-text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+    }
+    .invoice-items {
+        grid-gap: 2px;
+        margin-bottom: 50px;
+        &>div {
+            font-size: 13px;
+            padding: 10px;
+            background: $line-item-bg;
+            color: $line-item-text;
+        }
+        &>div:not(.invoice-item-label) {
+            text-align: center;
+        }
+    }
+    .signature {
+        border: 1px dashed $primary-color;
+        padding: 10px;
+        p {
+            font-size: 10px;
+            color: #333;
+            margin-bottom: 80px;
+        }
+    }
+    .total {
+        display: grid;
+        grid-template-columns: 1fr 120px 120px;
+        grid-gap: 2px;
+        .total-header {
+            grid-column: 2 / 4;
+            background: $line-header-bg;
+            text-align: center;
+            padding: 10px;
+            font-family: $font-title;
+            color: $line-header-text;
+        }
+        .total-label {
+            grid-column: 2 / 3;
+        }
+        .total-price {
+            grid-column: 3 / 3;
+        }
+        .total-label,
+        .total-price {
+            padding: 10px 20px;
+            background: $line-item-bg;
+            color: $line-item-text;
+            font-family: $font-title;
+            text-align: center;
+        }
+        .total-net {
+            background: $line-header-bg;
+            color: $line-header-text;
+        }
+    }
+}
+
+.footer {
+    padding: 10px;
+    background: $footer-bg;
+    color: $footer-text;
+    .footer-contact-info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        &>div {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            mat-icon {
+                margin-right: 5px;
+            }
+        }
+    }
+    .contact-info {
+        font-family: $font-title;
+        &>div {
+            font-size: 18px;
+        }
+    }
+    p {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 13px;
+        margin: 0;
+    }
+}

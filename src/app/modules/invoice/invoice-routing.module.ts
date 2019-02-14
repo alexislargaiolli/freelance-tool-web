@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 import { TriggerLoadInvoicesGuard } from './guards/trigger-load-invoices.guard';
-import { InvoiceFormComponent } from './components/invoice-form/invoice-form.component';
 import { TriggerLoadInvoiceGuard } from './guards/trigger-load-invoice.guard';
+import { InvoiceEditionComponent } from './components/invoice-edition/invoice-edition.component';
 
 const routes: Routes = [
     {
@@ -13,7 +13,7 @@ const routes: Routes = [
     },
     {
         path: ':invoiceId',
-        component: InvoiceFormComponent,
+        component: InvoiceEditionComponent,
         canActivate: [TriggerLoadInvoiceGuard]
     }
 ];

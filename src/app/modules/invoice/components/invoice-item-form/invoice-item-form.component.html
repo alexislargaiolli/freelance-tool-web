@@ -1,5 +1,5 @@
-<form [formGroup]="formArray"
-      class="page-form">
+<div [formGroup]="formArray"
+     class="page-form">
 
   <div *ngFor="let group of formArray.controls; let i=index"
        [formGroupName]="i"
@@ -45,15 +45,14 @@
     </mat-form-field>
 
     <button mat-icon-button
-            (click)="removeItem(i)">
+            (click)="delete.emit(i)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
 
   <div class="actions">
-    <button (click)="createItem()"
-            [disabled]="creating$ | async"
+    <button (click)="create.emit()"
             mat-button>Ajouter une ligne</button>
   </div>
 
-</form>
+</div>

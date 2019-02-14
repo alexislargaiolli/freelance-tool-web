@@ -20,6 +20,9 @@ export function getModifiedFields(formGroup: FormGroup | FormArray, attributes =
             if (Object.values(subAttributes).length > 0) {
                 attributes[name] = subAttributes;
             }
+        } else if (control instanceof FormArray) {
+            const subAttributes = getModifiedFields(control, {});
+            attributes[name] = Object.values(subAttributes);
         }
     }
     return attributes;

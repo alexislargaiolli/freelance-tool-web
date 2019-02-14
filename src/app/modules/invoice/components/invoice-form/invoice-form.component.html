@@ -1,8 +1,3 @@
-<mat-toolbar>
-  <button routerLink="../"
-          mat-button>Retour</button>
-</mat-toolbar>
-
 <form [formGroup]="form"
       *ngIf="form"
       class="page-form">
@@ -18,6 +13,14 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Numéro de facture</mat-label>
+      <input matInput
+             formControlName="code"
+             required
+             placeholder="Saisir un numéro...">
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Statut</mat-label>
       <mat-select placeholder="Sélectionner un status"
                   formControlName="state">
@@ -27,6 +30,24 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-slide-toggle formControlName="tvaActive">TVA</mat-slide-toggle>
+
+  </div>
+
+  <div class="form-group full-width">
+
+    <mat-form-field>
+      <mat-label>Date de validité</mat-label>
+      <input matInput
+             formControlName="validityDate"
+             [matDatepicker]="picker"
+             placeholder="Valide jusqu'au...">
+      <mat-datepicker-toggle matSuffix
+                             [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
   </div>
 
   <app-invoice-form-user-info [parentFormGroup]="form"></app-invoice-form-user-info>
@@ -39,9 +60,36 @@
             mat-button>Valider</button>
   </div>
 
+  <app-invoice-item-form #invoiceItemForm
+                         [formArray]="invoiceItems"
+                         (create)="createItem()"
+                         (delete)="removeItem($event)">
+  </app-invoice-item-form>
+
+  <div>
+    <mat-form-field *ngIf="tvaActive.value">
+      <mat-label>Total HT</mat-label>
+      <input matInput
+             type="number"
+             formControlName="amountDutyFree"
+             required
+             placeholder="Saisir un montant total HT...">
+    </mat-form-field>
+    <mat-form-field *ngIf="tvaActive.value">
+      <mat-label>Total TVA</mat-label>
+      <input matInput
+             type="number"
+             formControlName="tvaAmount"
+             required
+             placeholder="Saisir un total de TVA...">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Montant total TTC</mat-label>
+      <input matInput
+             type="number"
+             formControlName="amount"
+             required
+             placeholder="Saisir un montant total TTC...">
+    </mat-form-field>
+  </div>
 </form>
-
-<app-invoice-item-form #invoiceItemForm
-                       [invoiceId]="invoiceId$ | async">
-
-</app-invoice-item-form>

@@ -12,6 +12,11 @@ export interface AbstractDocument extends APIModel {
     title?: string;
 
     /**
+     * Numéro du document
+     */
+    code?: string;
+
+    /**
      * Montant totat à payer TTC
      */
     amount?: number;

@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <button routerLink="../"
+          mat-button>Retour</button>
+  <button (click)="save()"
+          mat-button>Sauvegarder</button>
+  <mat-button-toggle-group [value]="viewMode"
+                           (change)="changeViewMode($event)">
+    <mat-button-toggle [value]="InvoiceViewMode.FORM">
+      <mat-icon>edit</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle [value]="InvoiceViewMode.VIEW">
+      <mat-icon>insert_drive_file</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle [value]="InvoiceViewMode.SPLIT">
+      <mat-icon>vertical_split</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+</mat-toolbar>
+<div class="content">
+  <app-invoice-form (change)="onFormChange($event)"
+                    *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.FORM"></app-invoice-form>
+  <app-invoice-preview [invoice]="invoice"
+                       *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.VIEW"></app-invoice-preview>
+</div>

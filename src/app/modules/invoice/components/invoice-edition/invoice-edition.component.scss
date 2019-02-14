@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    app-invoice-preview {
+        min-width: 800px;
+        margin: 16px;
+        @media (min-width: 600px) {
+            margin: 32px;
+        }
+    }
+}

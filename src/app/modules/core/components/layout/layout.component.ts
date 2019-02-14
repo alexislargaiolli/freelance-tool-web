@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, tap, pairwise, filter } from 'rxjs/operators';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { UserCompaniesService } from '@core/services/user-companies.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -18,9 +17,7 @@ export class LayoutComponent implements OnInit {
   isMobile: boolean;
 
   constructor(
-    private _breakpointObserver: BreakpointObserver,
-    // Inject invoke contructor and trigger loads
-    private _userCompanyService: UserCompaniesService
+    private _breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit() {
