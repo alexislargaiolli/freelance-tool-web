@@ -41,11 +41,14 @@ body {
     }
 }
 
-.page-form {
+.page-container{
     margin: 16px;
     @media (min-width: 600px) {
         margin: 32px;
     }
+}
+
+.page-form {
     .actions,
     .full-width {
         min-width: 100%;

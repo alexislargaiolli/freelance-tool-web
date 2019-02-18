@@ -1,8 +1,19 @@
 <mat-toolbar>
   <button routerLink="../"
-          mat-button>Retour</button>
+          mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="flex-1"></div>
   <button (click)="save()"
-          mat-button>Sauvegarder</button>
+          mat-icon-button
+          *ngIf="viewMode === InvoiceViewMode.FORM || viewMode === InvoiceViewMode.SPLIT">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button (click)="exportToPDF()"
+          mat-icon-button
+          *ngIf="viewMode === InvoiceViewMode.VIEW || viewMode === InvoiceViewMode.SPLIT">
+    <mat-icon>picture_as_pdf</mat-icon>
+  </button>
   <mat-button-toggle-group [value]="viewMode"
                            (change)="changeViewMode($event)">
     <mat-button-toggle [value]="InvoiceViewMode.FORM">
@@ -17,9 +28,13 @@
   </mat-button-toggle-group>
 
 </mat-toolbar>
-<div class="content">
+<div class="page-container">
   <app-invoice-form (change)="onFormChange($event)"
                     *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.FORM"></app-invoice-form>
-  <app-invoice-preview [invoice]="invoice"
-                       *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.VIEW"></app-invoice-preview>
+  <div class="spacer"
+       *ngIf="viewMode === InvoiceViewMode.SPLIT"></div>
+  <div class="preview-wrapper"
+       *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.VIEW">
+    <app-invoice-preview [invoice]="invoice"></app-invoice-preview>
+  </div>
 </div>

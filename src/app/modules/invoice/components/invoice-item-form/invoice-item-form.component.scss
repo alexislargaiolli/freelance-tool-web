@@ -1,7 +1,19 @@
 .form-group {
     flex: 1;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding-top: 10px;
+    margin: 10px 0;
     mat-form-field:first-child {
         flex: 4;
         max-width: 500px;
+    }
+    mat-form-field:not(:first-child) {
+        min-width: 80px;
+    }
+    @media (max-width: 600px) {
+        mat-form-field:first-child {
+            flex-basis: 100%;
+        }
     }
 }

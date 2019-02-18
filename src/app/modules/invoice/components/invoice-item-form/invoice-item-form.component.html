@@ -30,6 +30,7 @@
              formControlName="unitPrice"
              required
              placeholder="Saisir un prix...">
+      <span matSuffix>€</span>
       <mat-error *ngIf="group.controls.unitPrice.invalid">Champs requis</mat-error>
     </mat-form-field>
 

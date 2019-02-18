@@ -2,6 +2,7 @@
       *ngIf="form"
       class="page-form">
 
+  <h2>Informations générales</h2>
   <div class="form-group full-width">
     <mat-form-field>
       <mat-label>Titre de la facture</mat-label>
@@ -50,8 +51,10 @@
 
   </div>
 
+  <h2>Mes coordonnées</h2>
   <app-invoice-form-user-info [parentFormGroup]="form"></app-invoice-form-user-info>
 
+  <h2>Coordonnées du client</h2>
   <app-invoice-form-customer-info [parentFormGroup]="form"></app-invoice-form-customer-info>
 
   <app-invoice-item-form #invoiceItemForm
