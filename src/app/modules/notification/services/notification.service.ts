@@ -29,15 +29,15 @@ export class NotificationService {
     return this.add(new Notification(message, NotificationType.SUCCESS, NotificationIcon.SAVE));
   }
 
-  public saveError(message: string) {
+  public saveError(message: string = 'La sauvegarde a échouée') {
     return this.add(new Notification(message, NotificationType.ERROR, NotificationIcon.SAVE));
   }
 
-  public removeSuccess(message: string) {
+  public removeSuccess(message: string = 'Suppression réussie') {
     return this.add(new Notification(message, NotificationType.SUCCESS, NotificationIcon.DELETE));
   }
 
-  public removeError(message: string) {
+  public removeError(message: string = 'La suppression a échouée') {
     return this.add(new Notification(message, NotificationType.ERROR, NotificationIcon.DELETE));
   }
 

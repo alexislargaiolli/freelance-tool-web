@@ -41,6 +41,7 @@
              formControlName="totalPrice"
              required
              placeholder="Saisir un prix total...">
+      <span matSuffix>€</span>
       <mat-error *ngIf="group.controls.totalPrice.invalid">Champs requis</mat-error>
     </mat-form-field>
 

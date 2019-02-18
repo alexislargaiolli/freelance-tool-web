@@ -55,6 +55,7 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       tvaAmount: [this.invoice.tvaAmount],
       tvaActive: [this.invoice.tvaActive, Validators.required],
       validityDate: [this.invoice.validityDate],
+      startDate: [this.invoice.startDate],
       userName: [this.invoice.userName],
       userPhone: [this.invoice.userPhone, Validators.pattern('[0-9]{10}')],
       userEmail: [this.invoice.userEmail, Validators.email],

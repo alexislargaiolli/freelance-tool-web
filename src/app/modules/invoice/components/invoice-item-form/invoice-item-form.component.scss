@@ -9,7 +9,8 @@
         max-width: 500px;
     }
     mat-form-field:not(:first-child) {
-        min-width: 80px;
+        min-width: 50px;
+        flex-basis: 50px;
     }
     @media (max-width: 600px) {
         mat-form-field:first-child {

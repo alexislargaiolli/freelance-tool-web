@@ -39,14 +39,25 @@
   <div class="form-group full-width">
 
     <mat-form-field>
+      <mat-label>Date de création</mat-label>
+      <input matInput
+             formControlName="startDate"
+             [matDatepicker]="startDatePicker"
+             placeholder="Créée le...">
+      <mat-datepicker-toggle matSuffix
+                             [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Date de validité</mat-label>
       <input matInput
              formControlName="validityDate"
-             [matDatepicker]="picker"
+             [matDatepicker]="validityDatePicker"
              placeholder="Valide jusqu'au...">
       <mat-datepicker-toggle matSuffix
-                             [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+                             [for]="validityDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #validityDatePicker></mat-datepicker>
     </mat-form-field>
 
   </div>
@@ -72,6 +83,7 @@
              formControlName="amountDutyFree"
              required
              placeholder="Saisir un montant total HT...">
+      <span matSuffix>€</span>
     </mat-form-field>
     <mat-form-field *ngIf="tvaActive.value">
       <mat-label>Total TVA</mat-label>
@@ -80,6 +92,7 @@
              formControlName="tvaAmount"
              required
              placeholder="Saisir un total de TVA...">
+      <span matSuffix>€</span>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Montant total TTC</mat-label>
@@ -88,6 +101,7 @@
              formControlName="amount"
              required
              placeholder="Saisir un montant total TTC...">
+      <span matSuffix>€</span>
     </mat-form-field>
   </div>
 </form>

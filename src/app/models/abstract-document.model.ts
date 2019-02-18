@@ -4,6 +4,8 @@ import { Address } from './address.model';
 export interface AbstractDocument extends APIModel {
     createdDate?: Date;
     updatedDate?: Date;
+
+    startDate?: Date;
     validityDate?: Date;
 
     /**

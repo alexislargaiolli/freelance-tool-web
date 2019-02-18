@@ -5,3 +5,18 @@ table {
 .spacer {
     flex: 1;
 }
+
+.mat-column-title {
+    flex: 4;
+}
+
+.mat-column-actions {
+    max-width: 100px;
+}
+
+.mat-row {
+    cursor: pointer;
+    &:hover {
+        background: #f5f5f5;
+    }
+}
