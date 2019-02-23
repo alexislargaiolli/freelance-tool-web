@@ -1,0 +1,13 @@
+<app-loading *ngIf="this.loading$ | async; else loadedTemplate"></app-loading>
+<ng-template #loadedTemplate>
+  <mat-toolbar>
+    <span>Clients</span>
+    <span class="spacer"></span>
+    <button mat-button
+            (click)="createCustomer()"
+            [disabled]="creating$ | async">Créer</button>
+  </mat-toolbar>
+  <app-customer-list [customers]="customers$ | async"
+                     (select)="selectCustomer($event)"
+                     (delete)="deleteCustomer($event)"></app-customer-list>
+</ng-template>

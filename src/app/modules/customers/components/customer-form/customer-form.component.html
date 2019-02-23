@@ -1,0 +1,69 @@
+<mat-toolbar>
+  <button routerLink="../"
+          mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="flex-1"></div>
+  <button (click)="save()"
+          mat-icon-button>
+    <mat-icon>save</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="page-container">
+  <form [formGroup]="form"
+        *ngIf="form"
+        class="page-form">
+
+    <div class="form-group full-width">
+      <mat-form-field>
+        <mat-label>Nom de l'entreprise</mat-label>
+        <input matInput
+               formControlName="name"
+               required
+               placeholder="Saisir...">
+        <mat-error *ngIf="name.invalid">Champs requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput
+               formControlName="lastname"
+               placeholder="Saisir...">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Prénom</mat-label>
+        <input matInput
+               formControlName="firstname"
+               placeholder="Saisir...">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Téléphone</mat-label>
+        <input matInput
+               formControlName="phone"
+               placeholder="Saisir...">
+        <mat-error *ngIf="phone.invalid">Numéro de téléphone invalide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput
+               formControlName="email"
+               placeholder="Saisir...">
+        <mat-error *ngIf="email.invalid">Adresse email invalide</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Numéro Siret</mat-label>
+        <input matInput
+               formControlName="siret"
+               placeholder="Saisir...">
+        <mat-error *ngIf="siret.invalid">Doit contenir 14 chiffres</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <app-input-address [parentFormGroup]="facturationAddress"></app-input-address>
+  </form>
+</div>

@@ -4,6 +4,7 @@ import { SessionService } from '@auth/services/session.service';
 import { AppUpdateService } from '@core/services/app-update.service';
 import { take } from 'rxjs/operators';
 import { UserCompaniesService } from '@core/services/user-companies.service';
+import { CustomersService } from '@core/services/customers.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   constructor(
     private _authService: AuthService,
     private _session: SessionService,
+    private _customersService: CustomersService,
     private _companyService: UserCompaniesService,
     private _appUpdate: AppUpdateService
   ) { }
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this._authService.checkAutoLogin().pipe(take(1)).subscribe();
     this._session.initialize();
+    this._customersService.initialize();
   }
 
 }

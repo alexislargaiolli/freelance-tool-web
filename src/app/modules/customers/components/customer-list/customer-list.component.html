@@ -1,0 +1,30 @@
+<mat-table [dataSource]="customers">
+  <ng-container cdkColumnDef="name">
+    <mat-header-cell *cdkHeaderCellDef> Nom de l'entreprise </mat-header-cell>
+    <mat-cell *cdkCellDef="let customer"> {{customer.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="lastname">
+    <mat-header-cell *cdkHeaderCellDef> Nom </mat-header-cell>
+    <mat-cell *cdkCellDef="let customer"> {{customer.lastname}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="firstname">
+    <mat-header-cell *cdkHeaderCellDef> Prénom </mat-header-cell>
+    <mat-cell *cdkCellDef="let customer"> {{customer.firstname}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="actions">
+    <mat-header-cell *cdkHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *cdkCellDef="let customer">
+      <button (click)="delete.emit(customer); $event.stopPropagation()"
+              mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *cdkHeaderRowDef="['name', 'lastname', 'firstname', 'actions']"></mat-header-row>
+  <mat-row *cdkRowDef="let customer; columns: ['name', 'lastname', 'firstname', 'actions']"
+           (click)="select.emit(customer)"></mat-row>
+</mat-table>

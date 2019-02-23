@@ -55,7 +55,7 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
       .subscribe((confirmed) => {
         if (confirmed) {
           this._invoicesService.delete(invoice.id).subscribe(
-            () => this._notifService.removeSuccess('Facture créée'),
+            () => this._notifService.removeSuccess(),
             () => this._notifService.removeError()
           );
         }

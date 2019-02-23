@@ -1,4 +1,5 @@
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Address } from '@models';
 
 export function validateAllFormFields(formGroup: FormGroup | FormArray) {
     Object.keys(formGroup.controls).forEach(field => {
@@ -26,4 +27,15 @@ export function getModifiedFields(formGroup: FormGroup | FormArray, attributes =
         }
     }
     return attributes;
+}
+
+export function buildAddressFormGroup(fb: FormBuilder, address: Address) {
+    return fb.group({
+        id: [address.id],
+        address1: [address != null ? address.address1 : '', Validators.required],
+        address2: [address != null ? address.address2 : ''],
+        address3: [address != null ? address.address3 : ''],
+        city: [address != null ? address.city : '', Validators.required],
+        postalCode: [address != null ? address.postalCode : '', Validators.required],
+    });
 }
