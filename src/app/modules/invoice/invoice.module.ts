@@ -9,6 +9,7 @@ import { InvoiceFormCustomerInfoComponent } from './components/invoice-form-cust
 import { InvoiceItemFormComponent } from './components/invoice-item-form/invoice-item-form.component';
 import { InvoicePreviewComponent } from './components/invoice-preview/invoice-preview.component';
 import { InvoiceEditionComponent } from './components/invoice-edition/invoice-edition.component';
+import { CustomersModule } from '../customers/customers.module';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,7 @@ import { InvoiceEditionComponent } from './components/invoice-edition/invoice-ed
     InvoicePreviewComponent, InvoiceEditionComponent
   ],
   imports: [
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    InvoiceRoutingModule
+    SharedModule, FormsModule, ReactiveFormsModule, InvoiceRoutingModule, CustomersModule
   ]
 })
 export class InvoiceModule { }

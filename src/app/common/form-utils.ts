@@ -35,6 +35,8 @@ export function buildAddressFormGroup(fb: FormBuilder, address: Address) {
         address1: [address != null ? address.address1 : '', Validators.required],
         address2: [address != null ? address.address2 : ''],
         address3: [address != null ? address.address3 : ''],
+        state: [],
+        country: [],
         city: [address != null ? address.city : '', Validators.required],
         postalCode: [address != null ? address.postalCode : '', Validators.required],
     });

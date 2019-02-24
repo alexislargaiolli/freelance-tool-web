@@ -4,6 +4,8 @@ mat-slide-toggle {
 }
 
 h2 {
+    display: flex;
+    align-items: center;
     background: #e0e0e0;
     margin-left: -16px;
     margin-right: -16px;
@@ -14,5 +16,8 @@ h2 {
     @media (max-width: 600px) {
         margin-left: -8px;
         margin-right: -8px;
+    }
+    button {
+        margin-left: 10px;
     }
 }

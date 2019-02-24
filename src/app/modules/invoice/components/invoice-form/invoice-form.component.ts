@@ -2,12 +2,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyObservable } from '@common/destroy-observable';
-import { validateAllFormFields } from '@common/form-utils';
+import { validateAllFormFields, buildAddressFormGroup } from '@common/form-utils';
 import { InvoicesService } from '@core/services/invoices.service';
 import { Address, Invoice, InvoiceItem, InvoiceState } from '@models';
 import { NotificationService } from '@notification/services/notification.service';
 import { combineLatest, merge, Observable } from 'rxjs';
 import { filter, map, startWith, takeUntil } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { SelectCustomerDialogComponent } from 'app/modules/customers/components/select-customer-dialog/select-customer-dialog.component';
+import { Customer } from 'app/models/customer.model';
 
 @Component({
   selector: 'app-invoice-form',
@@ -28,7 +31,8 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _invoiceService: InvoicesService,
     private _notif: NotificationService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -60,16 +64,31 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       userPhone: [this.invoice.userPhone, Validators.pattern('[0-9]{10}')],
       userEmail: [this.invoice.userEmail, Validators.email],
       userSiret: [this.invoice.userSiret, [Validators.minLength(14), Validators.maxLength(14)]],
-      userFacturationAddress: this.buildAddressFormGroup(this.invoice.userFacturationAddress),
+      userFacturationAddress: buildAddressFormGroup(this._fb, this.invoice.userFacturationAddress),
       customerName: [this.invoice.customerName],
       customerPhone: [this.invoice.customerPhone, Validators.pattern('[0-9]{10}')],
       customerEmail: [this.invoice.customerEmail, Validators.email],
       customerSiret: [this.invoice.customerSiret, [Validators.minLength(14), Validators.maxLength(14)]],
-      customerFacturationAddress: this.buildAddressFormGroup(this.invoice.customerFacturationAddress),
+      customerFacturationAddress: buildAddressFormGroup(this._fb, this.invoice.customerFacturationAddress),
     });
     this.form.addControl('invoiceItems', this.buildItemsFormArray(this.invoice.invoiceItems));
     this.form.valueChanges.pipe(takeUntil(this.destroy$), startWith(this.invoice)).subscribe(value => {
       this.change.emit(value);
+    });
+  }
+
+  openCustomerList() {
+    let dialogRef: MatDialogRef<SelectCustomerDialogComponent>;
+    dialogRef = this.dialog.open(SelectCustomerDialogComponent);
+    return dialogRef.afterClosed().subscribe((c: Customer) => {
+      this.form.controls.customerName.setValue(c.name);
+      this.form.controls.customerPhone.setValue(c.phone);
+      this.form.controls.customerSiret.setValue(c.siret);
+      this.form.controls.customerEmail.setValue(c.email);
+      const address = { ...c.facturationAddress };
+      address.id = null;
+      this.form.controls.customerFacturationAddress.setValue(address);
+      this.form.markAsDirty();
     });
   }
 
@@ -98,17 +117,6 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
 
   removeItem(index: number) {
     this.invoiceItems.removeAt(index);
-  }
-
-  buildAddressFormGroup(address: Address) {
-    return this._fb.group({
-      id: [address.id],
-      address1: [address != null ? address.address1 : '', Validators.required],
-      address2: [address != null ? address.address2 : ''],
-      address3: [address != null ? address.address3 : ''],
-      city: [address != null ? address.city : '', Validators.required],
-      postalCode: [address != null ? address.postalCode : '', Validators.required],
-    });
   }
 
   buildItemsFormArray(items: InvoiceItem[]): FormArray {

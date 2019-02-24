@@ -65,7 +65,13 @@
   <h2>Mes coordonnées</h2>
   <app-invoice-form-user-info [parentFormGroup]="form"></app-invoice-form-user-info>
 
-  <h2>Coordonnées du client</h2>
+  <h2>
+    Coordonnées du client
+    <button (click)="openCustomerList()"
+            mat-icon-button>
+      <mat-icon>import_contacts</mat-icon>
+    </button>
+  </h2>
   <app-invoice-form-customer-info [parentFormGroup]="form"></app-invoice-form-customer-info>
 
   <app-invoice-item-form #invoiceItemForm
