@@ -1,0 +1,12 @@
+<app-loading *ngIf="this.loading$ | async; else loadedTemplate"></app-loading>
+<ng-template #loadedTemplate>
+  <ng-container *ngIf="invoices$ | async as invoices">
+    <mat-list *ngIf="invoices.length > 0; else emptyMessageTemplate">
+      <mat-list-item (click)="selectInvoice(invoice)"
+                     *ngFor="let invoice of invoices"> {{invoice.title}} </mat-list-item>
+    </mat-list>
+    <ng-template #emptyMessageTemplate>
+      <p>Aucune facture</p>
+    </ng-template>
+  </ng-container>
+</ng-template>

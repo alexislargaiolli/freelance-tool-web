@@ -16,6 +16,7 @@ const routes: Routes = [
       { path: 'dashboard', loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard] },
       { path: 'company', loadChildren: 'app/modules/company/company.module#CompanyModule', canLoad: [AuthGuard] },
       { path: 'customers', loadChildren: 'app/modules/customers/customers.module#CustomersModule', canLoad: [AuthGuard] },
+      { path: 'tax-returns', loadChildren: 'app/modules/tax-returns/tax-returns.module#TaxReturnsModule', canLoad: [AuthGuard] },
       {
         path: 'invoice',
         loadChildren: 'app/modules/invoice/invoice.module#InvoiceModule',

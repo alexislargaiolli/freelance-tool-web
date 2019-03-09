@@ -1,0 +1,119 @@
+<mat-toolbar>
+  <button routerLink="../"
+          mat-icon-button>
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="flex-1"></div>
+  <button (click)="save()"
+          mat-icon-button>
+    <mat-icon>save</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="page-container">
+  <form [formGroup]="form"
+        *ngIf="form"
+        class="page-form">
+
+    <div class="form-group full-width">
+
+      <mat-form-field>
+        <mat-label>Date de déclaration</mat-label>
+        <input matInput
+               formControlName="date"
+               [matDatepicker]="datePicker"
+               placeholder="Faite le...">
+        <mat-datepicker-toggle matSuffix
+                               [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Type de déclaration</mat-label>
+        <mat-select placeholder="Sélectionner..."
+                    formControlName="type">
+          <mat-option *ngFor="let type of taxReturnTypes | values"
+                      [value]="type">
+            {{type}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="form-group full-width">
+
+      <mat-form-field>
+        <mat-label>Début de période</mat-label>
+        <input matInput
+               formControlName="periodStartDate"
+               [matDatepicker]="periodStartDatePicker"
+               placeholder="Saisir...">
+        <mat-datepicker-toggle matSuffix
+                               [for]="periodStartDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #periodStartDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fin de période</mat-label>
+        <input matInput
+               formControlName="periodEndDate"
+               [matDatepicker]="periodEndDatePicker"
+               placeholder="Saisir...">
+        <mat-datepicker-toggle matSuffix
+                               [for]="periodEndDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #periodEndDatePicker></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="form-group full-width">
+
+      <mat-form-field>
+        <mat-label>Montant</mat-label>
+        <input matInput
+               formControlName="amount"
+               placeholder="Saisir...">
+        <span matSuffix>€</span>
+      </mat-form-field>
+
+    </div>
+
+  </form>
+  <div>
+    <h2>Factures <button mat-button
+              (click)="openSelectInvoiceDialog()">Ajouter</button></h2>
+    <mat-table [dataSource]="form?.controls.invoices.value">
+
+      <ng-container cdkColumnDef="title">
+        <mat-header-cell *cdkHeaderCellDef> Titre </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.title}} </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="createdDate">
+        <mat-header-cell *cdkHeaderCellDef> Créé le </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.createdDate | date}} </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="amount">
+        <mat-header-cell *cdkHeaderCellDef> Montant </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.amount | currency:'EUR'}} </mat-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions">
+        <mat-header-cell *cdkHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice">
+          <button (click)="deleteInvoice(invoice); $event.stopPropagation()"
+                  mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *cdkHeaderRowDef="['title', 'createdDate', 'amount', 'actions']"></mat-header-row>
+      <mat-row *cdkRowDef="let row; columns: ['title', 'createdDate', 'amount', 'actions']"></mat-row>
+    </mat-table>
+
+    <p class="empty-message"
+       *ngIf="form?.controls.invoices.value.length === 0">Aucune facture</p>
+  </div>
+</div>

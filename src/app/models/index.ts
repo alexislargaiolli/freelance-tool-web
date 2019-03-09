@@ -7,6 +7,8 @@ export * from './invoice-item';
 export * from './invoice.model';
 export * from './user-role.enum';
 export * from './user.model';
+export * from './tax-returns.model';
+export * from './customer.model';
 export * from './enums';
 // end:ng42.barrel
 

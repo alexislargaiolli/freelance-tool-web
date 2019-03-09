@@ -1,0 +1,13 @@
+<app-loading *ngIf="this.loading$ | async; else loadedTemplate"></app-loading>
+<ng-template #loadedTemplate>
+  <mat-toolbar>
+    <span>Déclarations</span>
+    <span class="spacer"></span>
+    <button mat-button
+            (click)="create()"
+            [disabled]="creating$ | async">Créer</button>
+  </mat-toolbar>
+  <app-tax-return-list [taxReturns]="taxReturns$ | async"
+                       (select)="select($event)"
+                       (delete)="delete($event)"></app-tax-return-list>
+</ng-template>
