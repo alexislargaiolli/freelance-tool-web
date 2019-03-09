@@ -62,7 +62,7 @@ export class TaxReturnFormComponent extends DestroyObservable implements OnInit 
       type: [this.taxReturn.type],
       periodStartDate: [this.taxReturn.periodStartDate],
       periodEndDate: [this.taxReturn.periodEndDate],
-      invoices: [this.taxReturn.invoices]
+      invoices: [this.taxReturn.invoices ? this.taxReturn.invoices : []]
     });
     this.form.controls.invoices.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(invoices => {
       const amount = invoices.reduce((sum, invoice) => sum + invoice.amount, 0);
