@@ -4,7 +4,7 @@
 
   <h2>Informations générales</h2>
   <div class="form-group full-width">
-    <mat-form-field>
+    <mat-form-field class="title-input">
       <mat-label>Titre de la facture</mat-label>
       <input matInput
              formControlName="title"
@@ -12,6 +12,9 @@
              placeholder="Saisir un titre...">
       <mat-error *ngIf="title.invalid">Champs requis</mat-error>
     </mat-form-field>
+
+  </div>
+  <div class="form-group full-width">
 
     <mat-form-field>
       <mat-label>Numéro de facture</mat-label>
@@ -58,6 +61,23 @@
       <mat-datepicker-toggle matSuffix
                              [for]="validityDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #validityDatePicker></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+
+  <div class="form-group full-width">
+
+    <mat-slide-toggle formControlName="paid">Payé</mat-slide-toggle>
+
+    <mat-form-field *ngIf="form?.controls.paid.value">
+      <mat-label>Date de paiement</mat-label>
+      <input matInput
+             formControlName="paymentDate"
+             [matDatepicker]="paymentDatePicker"
+             placeholder="Payé le...">
+      <mat-datepicker-toggle matSuffix
+                             [for]="paymentDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #paymentDatePicker></mat-datepicker>
     </mat-form-field>
 
   </div>

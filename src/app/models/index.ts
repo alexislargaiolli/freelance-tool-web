@@ -10,5 +10,6 @@ export * from './user.model';
 export * from './tax-returns.model';
 export * from './customer.model';
 export * from './enums';
+export * from './period.model';
 // end:ng42.barrel
 

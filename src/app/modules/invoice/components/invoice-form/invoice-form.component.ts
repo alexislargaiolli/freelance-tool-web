@@ -11,6 +11,7 @@ import { filter, map, startWith, takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { SelectCustomerDialogComponent } from 'app/modules/customers/components/select-customer-dialog/select-customer-dialog.component';
 import { Customer } from 'app/models/customer.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-invoice-form',
@@ -60,6 +61,8 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       tvaActive: [this.invoice.tvaActive, Validators.required],
       validityDate: [this.invoice.validityDate],
       startDate: [this.invoice.startDate],
+      paid: [this.invoice.paid],
+      paymentDate: [this.invoice.paymentDate],
       userName: [this.invoice.userName],
       userPhone: [this.invoice.userPhone, Validators.pattern('[0-9]{10}')],
       userEmail: [this.invoice.userEmail, Validators.email],
@@ -75,6 +78,13 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
     this.form.valueChanges.pipe(takeUntil(this.destroy$), startWith(this.invoice)).subscribe(value => {
       this.change.emit(value);
     });
+    this.form.controls.startDate.valueChanges.pipe(
+      takeUntil(this.destroy$),
+      filter(startDate => startDate != null))
+      .subscribe(startDate => {
+        const validityDate = moment(startDate).add(1, 'month').endOf('month').toDate();
+        this.form.controls.validityDate.setValue(validityDate);
+      });
   }
 
   openCustomerList() {

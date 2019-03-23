@@ -59,6 +59,7 @@ export class TaxReturnFormComponent extends DestroyObservable implements OnInit 
     this.form = this._fb.group({
       date: [this.taxReturn.date],
       amount: [this.taxReturn.amount],
+      taxAmount: [this.taxReturn.taxAmount],
       type: [this.taxReturn.type],
       periodStartDate: [this.taxReturn.periodStartDate],
       periodEndDate: [this.taxReturn.periodEndDate],

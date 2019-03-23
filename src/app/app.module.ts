@@ -10,8 +10,10 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
+import * as moment from 'moment';
 
 registerLocaleData(localeFr);
+moment.locale('fr');
 
 @NgModule({
   declarations: [

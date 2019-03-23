@@ -5,20 +5,30 @@
             (click)="createInvoice()"
             [disabled]="creating$ | async">Créer une facture</button>
 </mat-toolbar>
-<mat-table [dataSource]="dataSource">
+<mat-table [dataSource]="dataSource"
+           matSort>
 
     <ng-container cdkColumnDef="title">
-        <mat-header-cell *cdkHeaderCellDef> Titre </mat-header-cell>
+        <mat-header-cell *cdkHeaderCellDef
+                         mat-sort-header> Titre </mat-header-cell>
         <mat-cell *cdkCellDef="let invoice"> {{invoice.title}} </mat-cell>
     </ng-container>
 
-    <ng-container cdkColumnDef="createdDate">
-        <mat-header-cell *cdkHeaderCellDef> Créé le </mat-header-cell>
-        <mat-cell *cdkCellDef="let invoice"> {{invoice.createdDate | date}} </mat-cell>
+    <ng-container cdkColumnDef="startDate">
+        <mat-header-cell *cdkHeaderCellDef
+                         mat-sort-header> Facture du </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.startDate | date}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="amount">
+        <mat-header-cell *cdkHeaderCellDef
+                         mat-sort-header> Montant </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.amount | currency: 'EUR'}} </mat-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="state">
-        <mat-header-cell *cdkHeaderCellDef> Status </mat-header-cell>
+        <mat-header-cell *cdkHeaderCellDef
+                         mat-sort-header> Status </mat-header-cell>
         <mat-cell *cdkCellDef="let invoice"> {{invoice.state}} </mat-cell>
     </ng-container>
 
@@ -32,7 +42,7 @@
         </mat-cell>
     </ng-container>
 
-    <mat-header-row *cdkHeaderRowDef="['title', 'createdDate', 'state', 'actions']"></mat-header-row>
-    <mat-row *cdkRowDef="let row; columns: ['title', 'createdDate', 'state', 'actions']"
+    <mat-header-row *cdkHeaderRowDef="['title', 'startDate', 'amount', 'state', 'actions']"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: ['title', 'startDate', 'amount', 'state', 'actions']"
              (click)="selectInvoice(row)"></mat-row>
 </mat-table>

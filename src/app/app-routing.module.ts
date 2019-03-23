@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@auth/guards/auth.guard';
 import { LayoutComponent } from '@core/components/layout/layout.component';
 import { LoginComponent } from '@core/components/login/login.component';
-import { TriggerLoadCompaniesGuard } from '@core/guard/trigger-load-companies.guard';
 import { CurrentCompanyLoadedGuard } from '@core/guard/current-company-loaded.guard';
+import { TriggerLoadCompagniesDataGuard } from '@core/guard/trigger-load-compagnies.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AuthGuard, TriggerLoadCompaniesGuard],
+    canActivate: [AuthGuard, TriggerLoadCompagniesDataGuard],
     canActivateChild: [AuthGuard, CurrentCompanyLoadedGuard],
     children: [
       { path: 'dashboard', loadChildren: 'app/modules/dashboard/dashboard.module#DashboardModule', canLoad: [AuthGuard] },

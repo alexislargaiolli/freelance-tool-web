@@ -9,5 +9,6 @@ export interface TaxReturn extends APIModel {
     periodEndDate?: Date;
     type?: TaxReturnType;
     amount?: number;
+    taxAmount?: number;
     invoices?: Invoice[];
 }

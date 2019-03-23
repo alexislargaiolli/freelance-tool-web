@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Invoice } from '@models';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSort } from '@angular/material';
 import { DestroyObservable } from 'app/common/destroy-observable';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -18,6 +18,8 @@ import { UserCompaniesService } from '@core/services/user-companies.service';
 })
 export class InvoiceListComponent extends DestroyObservable implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+
   dataSource = new MatTableDataSource<Invoice>();
   creating$: Observable<boolean>;
 
@@ -32,6 +34,7 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
     this.creating$ = this._invoicesService.creating$;
     this._invoicesService.items$.pipe(takeUntil(this.destroy$)).subscribe(invoices => this.dataSource.data = invoices);
   }

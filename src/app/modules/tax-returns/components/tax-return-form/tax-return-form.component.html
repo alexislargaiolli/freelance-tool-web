@@ -69,9 +69,19 @@
     <div class="form-group full-width">
 
       <mat-form-field>
-        <mat-label>Montant</mat-label>
+        <mat-label>Montant total</mat-label>
         <input matInput
+               type="number"
                formControlName="amount"
+               placeholder="Saisir...">
+        <span matSuffix>€</span>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Montant des taxes</mat-label>
+        <input matInput
+               type="number"
+               formControlName="taxAmount"
                placeholder="Saisir...">
         <span matSuffix>€</span>
       </mat-form-field>

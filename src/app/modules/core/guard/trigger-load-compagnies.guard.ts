@@ -7,7 +7,7 @@ import { delay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TriggerLoadCompaniesGuard implements CanActivate {
+export class TriggerLoadCompagniesDataGuard implements CanActivate {
 
   constructor(private _companyService: UserCompaniesService) { }
 

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth/services/auth.service';
 import { SessionService } from '@auth/services/session.service';
 import { AppUpdateService } from '@core/services/app-update.service';
-import { take } from 'rxjs/operators';
+import { take, filter } from 'rxjs/operators';
 import { UserCompaniesService } from '@core/services/user-companies.service';
 import { CustomersService } from '@core/services/customers.service';
+import { InvoicesService } from '@core/services/invoices.service';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +19,17 @@ export class AppComponent implements OnInit {
     private _session: SessionService,
     private _customersService: CustomersService,
     private _companyService: UserCompaniesService,
-    private _appUpdate: AppUpdateService
+    private _appUpdate: AppUpdateService,
+    private _invoiceService: InvoicesService
   ) { }
 
   ngOnInit(): void {
     this._authService.checkAutoLogin().pipe(take(1)).subscribe();
     this._session.initialize();
     this._customersService.initialize();
+    this._companyService.currentCompany$.pipe(filter(c => c != null)).subscribe(c => {
+      this._invoiceService.load().subscribe();
+    });
   }
 
 }
