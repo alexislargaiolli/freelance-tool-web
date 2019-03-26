@@ -1,19 +1,37 @@
-<mat-nav-list>
-   <a mat-list-item
-      routerLink="/dashboard">Tableau de bord</a>
-   <a mat-list-item
-      routerLink="/customers">Clients</a>
-   <a mat-list-item
-      routerLink=".">Devis</a>
-   <a mat-list-item
-      routerLink="/invoice">Factures</a>
-   <a mat-list-item
-      routerLink="/tax-returns">Déclaration</a>
-   <a mat-list-item
-      routerLink="/company">Société</a>
-</mat-nav-list>
+<nav>
+   <a routerLinkActive="active"
+      routerLink="/dashboard">
+      <mat-icon>dashboard</mat-icon>
+      Tableau de bord
+   </a>
+   <a routerLinkActive="active"
+      routerLink="/customers">
+      <mat-icon>import_contacts</mat-icon>
+      Clients
+   </a>
+   <!-- <a 
+      routerLinkActive="active"
+      routerLink=".">Devis</a> -->
+   <a routerLinkActive="active"
+      routerLink="/invoice">
+      <mat-icon>receipt</mat-icon>
+      Factures
+   </a>
+   <a routerLinkActive="active"
+      routerLink="/tax-returns">
+      <mat-icon>account_balance</mat-icon>
+      Déclaration
+   </a>
+   <a routerLinkActive="active"
+      routerLink="/company">
+      <mat-icon>domain</mat-icon>
+      Société
+   </a>
+</nav>
 
-<mat-nav-list>
-   <a mat-list-item
-      (click)="logout()">Deconnexion</a>
-</mat-nav-list>
+<nav>
+   <a (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+      Deconnexion
+   </a>
+</nav>

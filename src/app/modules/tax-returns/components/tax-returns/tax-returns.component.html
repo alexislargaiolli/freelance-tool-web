@@ -3,9 +3,11 @@
   <mat-toolbar>
     <span>Déclarations</span>
     <span class="spacer"></span>
-    <button mat-button
+    <button mat-icon-button
             (click)="create()"
-            [disabled]="creating$ | async">Créer</button>
+            [disabled]="creating$ | async">
+      <mat-icon>add</mat-icon>
+    </button>
   </mat-toolbar>
   <app-tax-return-list [taxReturns]="taxReturns$ | async"
                        (select)="select($event)"

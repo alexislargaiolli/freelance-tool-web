@@ -46,6 +46,8 @@ export class AuthInterceptor implements HttpInterceptor {
                             this._notification.error(`Vous n'êtes pas authentifié.`);
                         } else if (err.status === 403) {
                             this._notification.error(`Vous n'êtes pas authorisé à faire cela.`);
+                            this._router.navigateByUrl('/login');
+                            this._authService.logoutSuccess();
                         }
                     }
                 }

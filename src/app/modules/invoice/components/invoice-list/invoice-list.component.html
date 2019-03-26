@@ -1,9 +1,11 @@
 <mat-toolbar>
     <span>Factures</span>
     <span class="spacer"></span>
-    <button mat-button
+    <button mat-icon-button
             (click)="createInvoice()"
-            [disabled]="creating$ | async">Créer une facture</button>
+            [disabled]="creating$ | async">
+        <mat-icon>add</mat-icon>
+    </button>
 </mat-toolbar>
 <mat-table [dataSource]="dataSource"
            matSort>
@@ -16,8 +18,8 @@
 
     <ng-container cdkColumnDef="startDate">
         <mat-header-cell *cdkHeaderCellDef
-                         mat-sort-header> Facture du </mat-header-cell>
-        <mat-cell *cdkCellDef="let invoice"> {{invoice.startDate | date}} </mat-cell>
+                         mat-sort-header> Date </mat-header-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.startDate | date:(dateFormat$ | async)}} </mat-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="amount">
@@ -42,7 +44,7 @@
         </mat-cell>
     </ng-container>
 
-    <mat-header-row *cdkHeaderRowDef="['title', 'startDate', 'amount', 'state', 'actions']"></mat-header-row>
-    <mat-row *cdkRowDef="let row; columns: ['title', 'startDate', 'amount', 'state', 'actions']"
+    <mat-header-row *cdkHeaderRowDef="displayedColumns$ | async"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: (displayedColumns$ | async)"
              (click)="selectInvoice(row)"></mat-row>
 </mat-table>

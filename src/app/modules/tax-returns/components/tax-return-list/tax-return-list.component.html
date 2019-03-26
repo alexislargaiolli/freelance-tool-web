@@ -1,22 +1,23 @@
-<mat-table [dataSource]="taxReturns">
+<mat-table [dataSource]="taxReturns"
+           *ngIf="dateFormat$ | async as dateFormat">
   <ng-container cdkColumnDef="date">
-    <mat-header-cell *cdkHeaderCellDef> Date de déclaration </mat-header-cell>
-    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.date | date}} </mat-cell>
+    <mat-header-cell *cdkHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.date | date:dateFormat}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="periodStartDate">
     <mat-header-cell *cdkHeaderCellDef> Du </mat-header-cell>
-    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.periodStartDate | date}} </mat-cell>
+    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.periodStartDate | date:dateFormat}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="periodEndDate">
     <mat-header-cell *cdkHeaderCellDef> Au </mat-header-cell>
-    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.periodEndDate | date}} </mat-cell>
+    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.periodEndDate | date:dateFormat}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="amount">
-    <mat-header-cell *cdkHeaderCellDef> Au </mat-header-cell>
-    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.amount}} </mat-cell>
+    <mat-header-cell *cdkHeaderCellDef> Montant </mat-header-cell>
+    <mat-cell *cdkCellDef="let taxReturn"> {{taxReturn.amount | currency:'EUR'}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="actions">
@@ -29,7 +30,7 @@
     </mat-cell>
   </ng-container>
 
-  <mat-header-row *cdkHeaderRowDef="['date', 'periodStartDate', 'periodEndDate', 'amount', 'actions']"></mat-header-row>
-  <mat-row *cdkRowDef="let taxReturn; columns: ['date', 'periodStartDate', 'periodEndDate', 'amount', 'actions']"
+  <mat-header-row *cdkHeaderRowDef="displayedColumns$ | async"></mat-header-row>
+  <mat-row *cdkRowDef="let taxReturn; columns: (displayedColumns$ | async)"
            (click)="select.emit(taxReturn)"></mat-row>
 </mat-table>

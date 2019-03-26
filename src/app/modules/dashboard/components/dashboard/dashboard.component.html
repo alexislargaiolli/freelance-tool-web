@@ -1,18 +1,25 @@
-<mat-form-field>
-  <mat-label>Période</mat-label>
-  <mat-select placeholder="Sélectionner..."
-              [(value)]="currentPeriod"
-              [compareWith]="comparePeriod">
-    <mat-option *ngFor="let period of periods$ | async"
-                [value]="period">
-      {{period.start | date:'yyyy'}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<section>
+<div class="menu">
+  <mat-form-field appearance="outline">
+    <mat-label>Période</mat-label>
+    <mat-select placeholder="Sélectionner..."
+                [(value)]="currentPeriod"
+                [compareWith]="comparePeriod">
+      <mat-option *ngFor="let period of periods$ | async"
+                  [value]="period">
+        {{period.start | date:'yyyy'}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<section class="summary">
 
+  <ngx-charts-number-card *ngIf="summaryChart$ | async as chartData"
+                          cardColor="#232837"
+                          [results]="chartData"></ngx-charts-number-card>
+</section>
+<section class="turnover-chart">
   <ngx-charts-area-chart-stacked *ngIf="invoiceChartData$ | async as chartData"
-                                 [results]="chartData.results"
+                                 [results]="chartData"
                                  xAxis="true"
                                  yAxis="true"></ngx-charts-area-chart-stacked>
 

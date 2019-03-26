@@ -12,6 +12,37 @@ export class ChartService {
 
   constructor(private _invoiceService: InvoicesService) { }
 
+  public getSummaryChart(period$: Observable<Period>) {
+    const invoices$ = this._invoiceService.getInvoiceByPeriod(period$);
+    return invoices$.pipe(
+      withLatestFrom(period$),
+      map(([invoices, period]) => {
+        const totalTurnOver = invoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+        const turnOverDutyFree = invoices.reduce((sum, invoice) => sum + invoice.amountDutyFree, 0);
+        const totalTVA = invoices.reduce((sum, invoice) => sum + invoice.tvaAmount, 0);
+        const totalPayment = invoices.filter(invoice => invoice.paid).reduce((sum, invoice) => sum + invoice.amount, 0);
+        return [
+          {
+            name: 'Chiffre d\'affaire',
+            value: totalTurnOver
+          },
+          {
+            name: 'TVA collectée',
+            value: totalTVA
+          },
+          {
+            name: 'Chiffre d\'affaire HT',
+            value: turnOverDutyFree
+          },
+          {
+            name: 'Total paiement reçu',
+            value: totalPayment
+          }
+        ];
+      })
+    );
+  }
+
   public getFacturationChartData(period$: Observable<Period>) {
     const invoices$ = this._invoiceService.getInvoiceByPeriod(period$);
     return invoices$.pipe(
@@ -40,19 +71,16 @@ export class ChartService {
           });
           current.add(1, 'month');
         }
-        return {
-          results: [
-            {
-              name: 'Chiffre d\'affaire',
-              series: caSerie
-            },
-            {
-              name: 'TVA',
-              series: tvaSerie
-            }
-          ],
-          xAxisTicks: listOfMonth(period)
-        };
+        return [
+          {
+            name: 'Chiffre d\'affaire',
+            series: caSerie
+          },
+          {
+            name: 'TVA',
+            series: tvaSerie
+          }
+        ];
       })
     );
   }

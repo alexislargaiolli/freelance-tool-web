@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this._appUpdate.initialize();
     this._authService.checkAutoLogin().pipe(take(1)).subscribe();
     this._session.initialize();
     this._customersService.initialize();

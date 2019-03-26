@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   private _currentPeriod$ = new BehaviorSubject<Period>(null);
   periods$: Observable<Period[]>;
   invoiceChartData$: Observable<any>;
+  summaryChart$: Observable<any>;
 
   constructor(
     private _invociesService: InvoicesService,
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
     this.periods$.pipe(first()).subscribe(periods => this.currentPeriod = periods[0]);
     const currentPeriod$ = this._currentPeriod$.pipe(filter(period => period != null));
     this.invoiceChartData$ = this._chartService.getFacturationChartData(currentPeriod$);
+    this.summaryChart$ = this._chartService.getSummaryChart(currentPeriod$);
   }
 
   comparePeriod(p1: Period, p2: Period) {

@@ -8,6 +8,10 @@ import { DialogsService } from './dialog.service';
 export class AppUpdateService {
 
   constructor(private readonly updates: SwUpdate, private _dialogService: DialogsService) {
+
+  }
+
+  initialize() {
     this.updates.available.subscribe(event => {
       this.showAppUpdateAlert();
     });

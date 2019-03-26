@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { Invoice } from '@models';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { DestroyObservable } from 'app/common/destroy-observable';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NotificationService } from '@notification/services/notification.service';
 import { InvoicesService } from '@core/services/invoices.service';
 import * as moment from 'moment';
 import { DialogsService } from '@core/services/dialog.service';
 import { UserCompaniesService } from '@core/services/user-companies.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-invoice-list',
@@ -22,13 +23,17 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
 
   dataSource = new MatTableDataSource<Invoice>();
   creating$: Observable<boolean>;
+  displayedColumns$: Observable<string[]>;
+  dateFormat$: Observable<string>;
+  columns = ['title', 'startDate', 'amount', 'state', 'actions'];
 
   constructor(
     private _companyService: UserCompaniesService,
     private _invoicesService: InvoicesService,
     private _router: Router,
     private _notifService: NotificationService,
-    private _dialogService: DialogsService
+    private _dialogService: DialogsService,
+    private _breakpointObserver: BreakpointObserver
   ) {
     super();
   }
@@ -37,6 +42,28 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
     this.dataSource.sort = this.sort;
     this.creating$ = this._invoicesService.creating$;
     this._invoicesService.items$.pipe(takeUntil(this.destroy$)).subscribe(invoices => this.dataSource.data = invoices);
+
+    const breakpoints$ = this._breakpointObserver.observe([
+      Breakpoints.Handset,
+    ]);
+
+    this.dateFormat$ = breakpoints$.pipe(
+      map(result => {
+        if (result.matches) {
+          return 'shortDate';
+        }
+        return 'mediumDate';
+      })
+    );
+
+    this.displayedColumns$ = breakpoints$.pipe(
+      map(result => {
+        if (result.matches) {
+          return this.columns.filter(column => column !== 'amount' && column !== 'state');
+        }
+        return this.columns;
+      }),
+    );
   }
 
   createInvoice() {

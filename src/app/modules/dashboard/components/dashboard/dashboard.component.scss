@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.menu {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 20px 0 20px;
+}
+
+.summary {
+    height: 250px;
+}
+
+.turnover-chart {
+    height: 400px;
+    width: 100%;
+    max-width: 1024px;
+}
