@@ -17,10 +17,11 @@
                           cardColor="#232837"
                           [results]="chartData"></ngx-charts-number-card>
 </section>
-<section class="turnover-chart">
-  <ngx-charts-area-chart-stacked *ngIf="invoiceChartData$ | async as chartData"
-                                 [results]="chartData"
-                                 xAxis="true"
-                                 yAxis="true"></ngx-charts-area-chart-stacked>
+<section class="turnover-chart"
+         *ngIf="invoiceChartData$ | async as chartData">
+
+  <ngx-charts-bar-vertical-stacked [results]="chartData"
+                                   xAxis="true"
+                                   yAxis="true"></ngx-charts-bar-vertical-stacked>
 
 </section>

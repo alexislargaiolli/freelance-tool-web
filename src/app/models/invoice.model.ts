@@ -20,6 +20,16 @@ export interface Invoice extends AbstractDocument {
     paid?: boolean;
 
     /**
+     * True si la facture est gérée par du portage salarial
+     */
+    portage?: boolean;
+
+    /**
+     * Montant du salaire de portage salarial
+     */
+    portageSalary?: number;
+
+    /**
      * True si la facture a été déclarée
      */
     declaredToTaxService?: boolean;

@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit {
   periods$: Observable<Period[]>;
   invoiceChartData$: Observable<any>;
   summaryChart$: Observable<any>;
+  referenceLine = [{
+    name: 'CA max',
+    value: 70000
+  }];
 
   constructor(
     private _invociesService: InvoicesService,

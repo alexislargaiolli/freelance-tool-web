@@ -55,13 +55,15 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       title: [this.invoice.title, Validators.required],
       code: [this.invoice.code, Validators.required],
       state: [this.invoice.state, Validators.required],
-      amount: [this.invoice.amount],
-      amountDutyFree: [this.invoice.amountDutyFree],
-      tvaAmount: [this.invoice.tvaAmount],
+      amount: [this.invoice.amount, [Validators.min(0), Validators.max(99999999)]],
+      amountDutyFree: [this.invoice.amountDutyFree, [Validators.min(0), Validators.max(99999999)]],
+      tvaAmount: [this.invoice.tvaAmount, [Validators.min(0), Validators.max(99999999)]],
       tvaActive: [this.invoice.tvaActive, Validators.required],
       validityDate: [this.invoice.validityDate],
       startDate: [this.invoice.startDate],
       paid: [this.invoice.paid],
+      portage: [this.invoice.portage],
+      portageSalary: [this.invoice.portageSalary, [Validators.min(0), Validators.max(99999999)]],
       paymentDate: [this.invoice.paymentDate],
       userName: [this.invoice.userName],
       userPhone: [this.invoice.userPhone, Validators.pattern('[0-9]{10}')],
@@ -179,6 +181,7 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
 
   get title() { return this.form.get('title'); }
   get tvaActive() { return this.form.get('tvaActive'); }
+  get portage() { return this.form.get('portage'); }
 
   get invoiceItems(): FormArray { return this.form.get('invoiceItems') as FormArray; }
   get userFacturationAddress(): FormGroup { return this.form.get('userFacturationAddress') as FormGroup; }
