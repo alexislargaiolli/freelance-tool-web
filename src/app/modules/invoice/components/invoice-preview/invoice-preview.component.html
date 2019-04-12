@@ -21,13 +21,13 @@
            *ngIf="invoice.tvaIdentifier">N° TVA Intra {{invoice.tvaIdentifier}}</div>
       <div class="address1">{{invoice.userFacturationAddress?.address1}}</div>
       <div class="address2">{{invoice.userFacturationAddress?.address2}}</div>
-      <div class="city">{{invoice.userFacturationAddress?.zipcode}} {{invoice.userFacturationAddress?.city}}</div>
+      <div class="city">{{invoice.userFacturationAddress?.postalCode}} {{invoice.userFacturationAddress?.city}}</div>
     </div>
     <div>
       <div class="name">{{invoice.customerName}}</div>
       <div class="address1">{{invoice.customerFacturationAddress?.address1}}</div>
       <div class="address2">{{invoice.customerFacturationAddress?.address2}}</div>
-      <div class="city">{{invoice.customerFacturationAddress?.zipcode}}
+      <div class="city">{{invoice.customerFacturationAddress?.postalCode}}
         {{invoice.customerFacturationAddress?.city}}</div>
     </div>
   </div>
