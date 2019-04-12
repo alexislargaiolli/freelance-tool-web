@@ -78,7 +78,7 @@ export class InvoiceEditionComponent extends DestroyObservable implements OnInit
     html2pdf(element, {
       margin: 0,
       filename: this.generateFileName(),
-      image: { type: 'jpeg', quality: 0.98 },
+      image: { type: 'jpeg', quality: 1 },
       html2canvas: { dpi: 192, letterRendering: true },
       jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     });
