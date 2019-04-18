@@ -70,6 +70,7 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       userEmail: [this.invoice.userEmail, Validators.email],
       userSiret: [this.invoice.userSiret, [Validators.minLength(14), Validators.maxLength(14)]],
       userFacturationAddress: buildAddressFormGroup(this._fb, this.invoice.userFacturationAddress),
+      tvaIdentifier: [this.invoice.tvaIdentifier],
       customerName: [this.invoice.customerName],
       customerPhone: [this.invoice.customerPhone, Validators.pattern('[0-9]{10}')],
       customerEmail: [this.invoice.customerEmail, Validators.email],

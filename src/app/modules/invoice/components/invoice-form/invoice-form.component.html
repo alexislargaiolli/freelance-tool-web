@@ -96,7 +96,13 @@
 
   <h2>Mes coordonnées</h2>
   <app-invoice-form-user-info [parentFormGroup]="form"></app-invoice-form-user-info>
-
+  <mat-form-field *ngIf="tvaActive.value">
+    <mat-label>Numéro de TVA intra</mat-label>
+    <input matInput
+           formControlName="tvaIdentifier"
+           required
+           placeholder="Saisir...">
+  </mat-form-field>
   <h2>
     Coordonnées du client
     <button (click)="openCustomerList()"
