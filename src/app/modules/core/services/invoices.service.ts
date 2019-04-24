@@ -16,6 +16,12 @@ export class InvoicesService extends APIModelRepository<Invoice> {
     super(_httpClient, `/${CurrentCompanyInterceptor.KEYWORD}/invoices`);
   }
 
+  invoicesByPeriod(period$: Observable<Period>) {
+    return combineLatest(this.items$, period$).pipe(
+      map(([invoices, period]) => invoices.filter(invoice => moment(invoice.startDate).isBetween(period.start, period.end)))
+    );
+  }
+
   load() {
     return super.load(`${this._url}?join=userFacturationAddress&join=customerFacturationAddress`);
   }

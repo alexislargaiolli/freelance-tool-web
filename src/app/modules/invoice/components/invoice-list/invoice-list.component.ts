@@ -11,6 +11,7 @@ import * as moment from 'moment';
 import { DialogsService } from '@core/services/dialog.service';
 import { UserCompaniesService } from '@core/services/user-companies.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { PeriodService } from '@core/services/period.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -33,7 +34,8 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
     private _router: Router,
     private _notifService: NotificationService,
     private _dialogService: DialogsService,
-    private _breakpointObserver: BreakpointObserver
+    private _breakpointObserver: BreakpointObserver,
+    private _periodService: PeriodService
   ) {
     super();
   }
@@ -41,7 +43,9 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.creating$ = this._invoicesService.creating$;
-    this._invoicesService.items$.pipe(takeUntil(this.destroy$)).subscribe(invoices => this.dataSource.data = invoices);
+    this._invoicesService.getInvoiceByPeriod(this._periodService.currentPeriod$)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(invoices => this.dataSource.data = invoices);
 
     const breakpoints$ = this._breakpointObserver.observe([
       Breakpoints.Handset,

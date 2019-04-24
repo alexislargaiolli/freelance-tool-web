@@ -1,7 +1,14 @@
 <app-loading *ngIf="this.loading$ | async; else loadedTemplate"></app-loading>
 <ng-template #loadedTemplate>
+  <mat-form-field class="search-bar">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput
+           [formControl]="searchBar"
+           placeholder="Rechercher">
+  </mat-form-field>
   <ng-container *ngIf="invoices$ | async as invoices">
-    <mat-list *ngIf="invoices.length > 0; else emptyMessageTemplate">
+    <mat-list *ngIf="invoices.length > 0; else emptyMessageTemplate"
+              class="very-light-scrollbar">
       <mat-list-item (click)="selectInvoice(invoice)"
                      *ngFor="let invoice of invoices"> {{invoice.title}} </mat-list-item>
     </mat-list>

@@ -9,9 +9,14 @@
 
 mat-toolbar {
     border-bottom: 1px solid #ddd;
+    justify-content: space-between;
 
     span {
         margin-left: 10px;
+    }
+
+    app-period-select{
+        font-size: 14px;
     }
 }
 

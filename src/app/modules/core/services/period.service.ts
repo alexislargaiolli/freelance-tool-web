@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, startWith, filter } from 'rxjs/operators';
 import { InvoicesService } from './invoices.service';
 import { Period } from '@models';
 
@@ -10,9 +10,19 @@ import { Period } from '@models';
 })
 export class PeriodService {
 
+  private _currentPeriod$ = new BehaviorSubject<Period>(null);
+  private _periods$ = new BehaviorSubject<Period[]>([]);
+
   constructor(
     private _invociesService: InvoicesService
-  ) { }
+  ) {
+    this.getPeriods().subscribe(periods => {
+      if (this._currentPeriod$.value == null) {
+        this._currentPeriod$.next(periods[0]);
+      }
+      this._periods$.next(periods);
+    });
+  }
 
   getPeriodsFrom(from$: Observable<Date>): Observable<Period[]> {
     return from$.pipe(
@@ -38,4 +48,10 @@ export class PeriodService {
     return this.getPeriodsFrom(olderInvoiceDate);
   }
 
+  selectPeriod(period: Period) {
+    this._currentPeriod$.next(period);
+  }
+
+  get currentPeriod$(): Observable<Period> { return this._currentPeriod$.pipe(filter(period => period != null)); }
+  get periods$(): Observable<Period[]> { return this._periods$; }
 }

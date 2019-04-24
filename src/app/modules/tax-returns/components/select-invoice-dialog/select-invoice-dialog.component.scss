@@ -1,0 +1,15 @@
+.search-bar{
+    display: block;
+}
+
+mat-list{
+    height: 80vh;
+    overflow-y: auto;
+}
+
+mat-list-item{
+    cursor: pointer;
+    &:hover{
+        background: #eee;
+    }
+}

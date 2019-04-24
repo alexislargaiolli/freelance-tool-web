@@ -42,7 +42,8 @@ export class TaxReturnFormComponent extends DestroyObservable implements OnInit 
           const taxReturn: TaxReturn = {
             date: new Date(),
             type: TaxReturnType.QUARTERLY,
-            amount: 0
+            amount: 0,
+            taxAmount: 0
           };
           return of(taxReturn);
         } else {
@@ -66,7 +67,7 @@ export class TaxReturnFormComponent extends DestroyObservable implements OnInit 
       invoices: [this.taxReturn.invoices ? this.taxReturn.invoices : []]
     });
     this.form.controls.invoices.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(invoices => {
-      const amount = invoices.reduce((sum, invoice) => sum + invoice.amount, 0);
+      const amount = invoices.reduce((sum, invoice) => sum + invoice.amountDutyFree, 0);
       this.form.controls.amount.setValue(amount);
       this.form.controls.invoices.markAsDirty();
     });
