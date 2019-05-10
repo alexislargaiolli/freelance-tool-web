@@ -13,7 +13,8 @@
     <ng-container cdkColumnDef="title">
         <mat-header-cell *cdkHeaderCellDef
                          mat-sort-header> Titre </mat-header-cell>
-        <mat-cell *cdkCellDef="let invoice"> {{invoice.title}} </mat-cell>
+        <mat-cell *cdkCellDef="let invoice"> {{invoice.title}} <span class="portage-label"
+                  *ngIf="invoice.portage">Portage</span></mat-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="startDate">

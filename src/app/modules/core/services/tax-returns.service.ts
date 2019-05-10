@@ -4,7 +4,8 @@ import { APIModelRepository } from './api-model.repository';
 import { HttpClient } from '@angular/common/http';
 import { CurrentCompanyInterceptor } from '@core/interceptors/current-company.interceptor';
 import { Period } from '@models';
-import { map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { combineLatest, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,10 @@ export class TaxReturnsService extends APIModelRepository<TaxReturn> {
     return super.loadOne(id, `${this._url}/${id}?join=invoices`);
   }
 
-  // itemsByPeriod(period: Period) {
-  //   return this.items$.pipe(
-  //     map(taxReturns => taxReturns.filter(taxReturn.))
-  //   );
-  // }
+  itemsByPeriod(period$: Observable<Period>) {
+    return combineLatest(this.items$, period$, (taxReturns, period) => {
+      return taxReturns.filter(taxReturn => moment(taxReturn.periodStartDate).isBetween(period.start, period.end));
+    });
+  }
 
 }

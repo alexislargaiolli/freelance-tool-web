@@ -1,27 +1,36 @@
-:host {
+mat-sidenav-container {
     height: 100vh;
     width: 100vw;
-    position: absolute;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 64px 1fr;
+    display: block;
 }
 
 mat-toolbar {
     border-bottom: 1px solid #ddd;
     justify-content: space-between;
 
-    span {
-        margin-left: 10px;
-    }
-
-    app-period-select{
+    app-period-select {
         font-size: 14px;
     }
 }
 
+mat-sidenav-content {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px 1fr;
+    overflow: hidden;
+}
+
 @media (max-width: 599px) {
-    :host {
+    mat-sidenav-content {
         grid-template-rows: 56px 1fr;
     }
+}
+
+main {
+    overflow-y: auto;
+}
+
+mat-sidenav {
+    border: none;
 }

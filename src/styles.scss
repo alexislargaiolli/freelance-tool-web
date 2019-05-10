@@ -19,9 +19,18 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    .spacer{
+
+    .spacer {
         flex: 1;
     }
+}
+
+.mat-drawer-container {
+    background-color: #f2f3f7;
+}
+
+.mat-toolbar {
+    background: #fff;
 }
 
 .card-form {
@@ -115,7 +124,7 @@ mat-table {
     background: transparent;
 
     mat-header-row {
-        background: #444;
+        background: #343746;
 
         .mat-header-cell {
             color: #fff;

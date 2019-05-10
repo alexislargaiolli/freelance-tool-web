@@ -6,6 +6,7 @@ import { take, filter } from 'rxjs/operators';
 import { UserCompaniesService } from '@core/services/user-companies.service';
 import { CustomersService } from '@core/services/customers.service';
 import { InvoicesService } from '@core/services/invoices.service';
+import { TaxReturnsService } from '@core/services/tax-returns.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     private _customersService: CustomersService,
     private _companyService: UserCompaniesService,
     private _appUpdate: AppUpdateService,
-    private _invoiceService: InvoicesService
+    private _invoiceService: InvoicesService,
+    private _taxReturnService: TaxReturnsService
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
     this._customersService.initialize();
     this._companyService.currentCompany$.pipe(filter(c => c != null)).subscribe(c => {
       this._invoiceService.load().subscribe();
+      this._taxReturnService.load().subscribe();
     });
   }
 

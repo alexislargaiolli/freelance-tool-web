@@ -44,6 +44,18 @@ export class InvoicesService extends APIModelRepository<Invoice> {
     );
   }
 
+  generateInvoiceCode(date: Date, invoiceIdToIgnore: number) {
+    const momentDate = moment(date);
+    const invoicesOfSameDay = this.items.filter(invoice => {
+      if (invoiceIdToIgnore != null && invoiceIdToIgnore === invoice.id) {
+        return false;
+      }
+      return momentDate.isSame(moment(invoice.startDate), 'day');
+    });
+
+    return `${momentDate.format('YY-MM-DD')}-${invoicesOfSameDay.length}`;
+  }
+
   getInvoiceByPeriod(period$: Observable<Period>) {
     return combineLatest(this.items$, period$, (invoices, period) => {
       return invoices.filter(invoice => moment(invoice.startDate).isBetween(period.start, period.end));

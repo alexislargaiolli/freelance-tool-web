@@ -74,10 +74,12 @@ export class InvoiceListComponent extends DestroyObservable implements OnInit {
     const company = this._companyService.currentCompany;
     const userFacturationAddress = { ...company.facturationAddress };
     delete userFacturationAddress['id'];
+    const startDate = moment(this._periodService.currentPeriod.start).set('date', 1).set('month', moment().month()).toDate();
+    const code = this._invoicesService.generateInvoiceCode(startDate, null);
     const invoice: Invoice = {
       title: 'Nouvelle facture',
-      code: `${this.dataSource.data.length + 1}`,
-      startDate: new Date(),
+      code,
+      startDate,
       validityDate: moment().add(1, 'M').toDate(),
       userName: company.name,
       userPhone: company.phone,

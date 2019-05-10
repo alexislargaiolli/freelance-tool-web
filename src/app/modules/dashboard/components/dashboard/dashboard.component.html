@@ -1,9 +1,48 @@
-<section class="summary">
+<!-- <section class="summary">
 
   <ngx-charts-number-card *ngIf="summaryChart$ | async as chartData"
                           cardColor="#232837"
                           [results]="chartData"></ngx-charts-number-card>
+</section> -->
+
+<section class="summaries">
+  <div *ngIf="summary$ | async as summary"
+       class="summary mat-elevation-z1">
+    <h2>Chiffre d'affaire</h2>
+    <label>Total</label>
+    <div>{{summary.turnover.total | currency:'EUR'}}</div>
+    <label>Total sans la TVA</label>
+    <div>{{summary.turnover.totalDutyFree | currency:'EUR'}}</div>
+    <label>Total sans le portage</label>
+    <div>{{summary.turnover.totalWithoutPortage | currency:'EUR'}}</div>
+    <label>Total sans le portage ni la TVA</label>
+    <div>{{summary.turnover.totalWithoutPortageDutyFree | currency:'EUR'}}</div>
+  </div>
+
+  <div *ngIf="summary$ | async as summary"
+       class="summary mat-elevation-z1">
+    <h2>Portage salarial</h2>
+    <label>Total</label>
+    <div>{{summary.portage.total | currency:'EUR'}}</div>
+    <label>Total sans la TVA</label>
+    <div>{{summary.portage.totalDutyFree | currency:'EUR'}}</div>
+    <label>Total salaire NET</label>
+    <div>{{summary.portage.totalSalary | currency:'EUR'}}</div>
+  </div>
+
+  <div *ngIf="summary$ | async as summary"
+       class="summary mat-elevation-z1">
+    <h2>Recettes</h2>
+    <label>Total</label>
+    <div>{{summary.profit.total | currency:'EUR'}}</div>
+    <label>Total taxe URSSAF</label>
+    <div>{{summary.profit.totalTax | currency:'EUR'}}</div>
+    <label>Total NET</label>
+    <div>{{summary.profit.totalDutyFree | currency:'EUR'}}</div>
+  </div>
+
 </section>
+
 <section class="turnover-chart"
          *ngIf="invoiceChartData$ | async as chartData">
 

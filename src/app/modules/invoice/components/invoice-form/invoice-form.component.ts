@@ -87,6 +87,8 @@ export class InvoiceFormComponent extends DestroyObservable implements OnInit {
       .subscribe(startDate => {
         const validityDate = moment(startDate).add(1, 'month').endOf('month').toDate();
         this.form.controls.validityDate.setValue(validityDate);
+        const code = this._invoiceService.generateInvoiceCode(startDate, this.invoice.id);
+        this.form.controls.code.setValue(code);
       });
   }
 

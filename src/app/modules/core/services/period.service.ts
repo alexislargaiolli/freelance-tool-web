@@ -53,5 +53,6 @@ export class PeriodService {
   }
 
   get currentPeriod$(): Observable<Period> { return this._currentPeriod$.pipe(filter(period => period != null)); }
+  get currentPeriod(): Period { return this._currentPeriod$.value; }
   get periods$(): Observable<Period[]> { return this._periods$; }
 }
