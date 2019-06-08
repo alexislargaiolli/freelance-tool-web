@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { InvoicesService } from './invoices.service';
-import { Observable, combineLatest } from 'rxjs';
-import { TurnOverInfo } from 'app/models/turnover-info.model';
-import { Period, Invoice, InvoiceState } from '@models';
-import { map } from 'rxjs/operators';
+import { InvoiceState, Period } from '@models';
 import { DashboardSummary } from 'app/models/dashboard-summary.model';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { InvoicesService } from './invoices.service';
 import { TaxReturnsService } from './tax-returns.service';
 
 @Injectable({

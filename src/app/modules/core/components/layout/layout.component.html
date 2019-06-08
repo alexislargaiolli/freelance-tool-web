@@ -17,8 +17,51 @@
             <span></span>
             <app-period-select></app-period-select>
         </mat-toolbar>
-        <main>
-            <router-outlet></router-outlet>
+        <main [@mobileMenuAnim]="menuMobileState">
+            <div class="router-wrapper"
+                 (swipeleft)="openMobileMenu()"
+                 (swiperight)="closeMobileMenu()">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="mobile-menu">
+                <button mat-button
+                        (click)="closeMobileMenu()"
+                        routerLink="/dashboard">
+                    <mat-icon>dashboard</mat-icon>
+                    <span>Tableau de bord</span>
+                </button>
+                <button mat-button
+                        (click)="closeMobileMenu()"
+                        routerLink="/invoice">
+                    <mat-icon>receipt</mat-icon>
+                    <span>Factures</span>
+                </button>
+                <button routerLink="/tax-returns"
+                        mat-button
+                        (click)="closeMobileMenu()">
+                    <mat-icon>domain</mat-icon>
+                    <span>Déclarations</span>
+                </button>
+                <button mat-button
+                        (click)="closeMobileMenu()"
+                        routerLink="/customers">
+                    <mat-icon>import_contacts</mat-icon>
+                    <span>Clients</span>
+                </button>
+                <button routerLink="/company"
+                        mat-button
+                        (click)="closeMobileMenu()">
+                    <mat-icon>domain</mat-icon>
+                    <span>Société</span>
+                </button>
+
+                <!-- <button mat-button
+                        (click)="toggle()">
+                    <mat-icon *ngIf="!opened">menu</mat-icon>
+                    <mat-icon *ngIf="opened">close</mat-icon>
+                </button> -->
+            </div>
         </main>
+
     </mat-sidenav-content>
 </mat-sidenav-container>

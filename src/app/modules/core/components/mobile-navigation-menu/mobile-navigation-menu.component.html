@@ -1,0 +1,31 @@
+<button mat-mini-fab
+        color="primary">
+  <mat-icon>domain</mat-icon>
+  <span>Société</span>
+</button>
+<button mat-mini-fab
+        color="primary">
+  <mat-icon>domain</mat-icon>
+  <span>Déclarations</span>
+</button>
+<button mat-mini-fab
+        color="primary">
+  <mat-icon>import_contacts</mat-icon>
+  <span>Clients</span>
+</button>
+<button mat-mini-fab
+        color="primary">
+  <mat-icon>receipt</mat-icon>
+  <span>Factures</span>
+</button>
+<button mat-mini-fab
+        color="primary">
+  <mat-icon>dashboard</mat-icon>
+  <span>Tableau de bord</span>
+</button>
+<button mat-mini-fab
+        color="primary"
+        (click)="toggle()">
+  <mat-icon *ngIf="!opened">menu</mat-icon>
+  <mat-icon *ngIf="opened">close</mat-icon>
+</button>

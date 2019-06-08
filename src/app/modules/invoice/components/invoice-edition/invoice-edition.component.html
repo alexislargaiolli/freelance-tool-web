@@ -28,7 +28,7 @@
   </mat-button-toggle-group>
 
 </mat-toolbar>
-<div class="page-container">
+<div>
   <app-invoice-form (change)="onFormChange($event)"
                     *ngIf="viewMode === InvoiceViewMode.SPLIT || viewMode === InvoiceViewMode.FORM"></app-invoice-form>
   <div class="spacer"

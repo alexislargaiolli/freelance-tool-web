@@ -3,11 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { layoutAnim } from './layout.animation';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  animations: [layoutAnim]
 })
 export class LayoutComponent implements OnInit {
 
@@ -15,6 +17,7 @@ export class LayoutComponent implements OnInit {
   sideNavMode$: Observable<string>;
   mobileBreakpoint$: Observable<boolean>;
   isMobile: boolean;
+  menuMobileState = false;
 
   constructor(
     private _breakpointObserver: BreakpointObserver
@@ -37,6 +40,16 @@ export class LayoutComponent implements OnInit {
       }
     });
 
+  }
+
+  openMobileMenu() {
+    this.menuMobileState = true;
+    console.log('open');
+  }
+
+  closeMobileMenu() {
+    this.menuMobileState = false;
+    console.log('close');
   }
 
   close(reason: string) {

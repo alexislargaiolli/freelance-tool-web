@@ -1,0 +1,65 @@
+@import 'trigonometry';
+
+@mixin translateCircle($index, $item_count, $radius, $item-width) {
+    $angle: (90deg / ($item_count + 1)) * $index;
+    $deltaX: sin($angle) * $radius;
+    $deltaY: cos($angle) * $radius;
+    $translateX: $radius - $deltaX;
+    $translateY: $radius - $deltaY;
+    transform: translateX($translateX) translateY($translateY);
+}
+
+:host {
+    $width: 66vw;
+    $radius: $width;
+    $item-width: 40px;
+    position: absolute;
+    right: 10vw;
+    top: 66vh;
+    z-index: 100;
+    width: $width;
+    height: $width;
+    transform: translateX(-25px) rotate(0deg);
+    transform-origin: bottom right;
+
+    button {
+        // position: absolute;
+        // left: -20px;
+        // top: -20px;
+        display: block;
+
+        &::ng-deep .mat-button-wrapper>span {
+            position: absolute;
+            top: 35px;
+            color: #444;
+        }
+    }
+
+    // button:nth-child(1) {
+    //     @include translateCircle(1, 6, $radius, $item-width);
+    // }
+
+    // button:nth-child(2) {
+    //     @include translateCircle(2, 6, $radius, $item-width);
+    // }
+
+    // button:nth-child(3) {
+    //     @include translateCircle(3, 6, $radius, $item-width);
+    // }
+
+    // button:nth-child(4) {
+    //     @include translateCircle(4, 6, $radius, $item-width);
+    // }
+
+    // button:nth-child(5) {
+    //     @include translateCircle(5, 6, $radius, $item-width);
+    // }
+
+    // button:nth-child(6) {
+    //     @include translateCircle(6, 6, $radius, $item-width);
+
+    //     mat-icon {
+    //         transform: rotate(90deg);
+    //     }
+    // }
+}

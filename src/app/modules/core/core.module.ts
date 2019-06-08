@@ -9,9 +9,17 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CurrentCompanyInterceptor } from './interceptors/current-company.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MobileNavigationMenuComponent } from './components/mobile-navigation-menu/mobile-navigation-menu.component';
 
 @NgModule({
-  declarations: [LoginComponent, LayoutComponent, HeaderComponent, SidenavComponent, ConfirmDialogComponent],
+  declarations: [
+    LoginComponent,
+    LayoutComponent,
+    HeaderComponent,
+    SidenavComponent,
+    ConfirmDialogComponent,
+    MobileNavigationMenuComponent
+  ],
   imports: [
     SharedModule,
     FormsModule,

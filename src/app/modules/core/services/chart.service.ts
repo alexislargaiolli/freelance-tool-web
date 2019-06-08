@@ -12,49 +12,6 @@ export class ChartService {
 
   constructor(private _invoiceService: InvoicesService) { }
 
-  public getSummaryChart(period$: Observable<Period>) {
-    const invoices$ = this._invoiceService.getInvoiceByPeriod(period$);
-    return invoices$.pipe(
-      withLatestFrom(period$),
-      map(([invoices, period]) => {
-        const invoicesWithoutPortage = invoices.filter(i => !i.portage);
-        const totalTurnOver = invoicesWithoutPortage.reduce((sum, invoice) => sum + invoice.amount, 0);
-        const turnOverDutyFree = invoicesWithoutPortage.reduce((sum, invoice) => sum + invoice.amountDutyFree, 0);
-        const totalTVA = invoicesWithoutPortage.reduce((sum, invoice) => sum + invoice.tvaAmount, 0);
-        const totalPayment = invoicesWithoutPortage.filter(invoice => invoice.paid).reduce((sum, invoice) => sum + invoice.amount, 0);
-        const totalPortage = invoices.filter(invoice => invoice.portage).reduce((sum, invoice) => sum + invoice.amount, 0);
-        const totalPortageSalary = invoices.filter(invoice => invoice.portage && invoice.paid)
-          .reduce((sum, invoice) => sum + invoice.portageSalary, 0);
-        return [
-          {
-            name: 'Chiffre d\'affaire',
-            value: totalTurnOver
-          },
-          {
-            name: 'TVA collectée',
-            value: totalTVA
-          },
-          {
-            name: 'Chiffre d\'affaire HT',
-            value: turnOverDutyFree
-          },
-          {
-            name: 'Total paiement reçu',
-            value: totalPayment
-          },
-          {
-            name: 'Total portage salarial',
-            value: totalPortage
-          },
-          {
-            name: 'Salaire portage salarial',
-            value: totalPortageSalary
-          }
-        ];
-      })
-    );
-  }
-
   public getFacturationChartData(period$: Observable<Period>) {
     const invoices$ = this._invoiceService.getInvoiceByPeriod(period$);
     return invoices$.pipe(
