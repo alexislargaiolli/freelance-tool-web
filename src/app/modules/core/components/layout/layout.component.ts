@@ -25,7 +25,7 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.mobileBreakpoint$ = this._breakpointObserver.observe([
-      Breakpoints.Handset,
+      Breakpoints.HandsetPortrait,
     ]).pipe(
       map(result => result.matches),
     );
@@ -44,12 +44,10 @@ export class LayoutComponent implements OnInit {
 
   openMobileMenu() {
     this.menuMobileState = true;
-    console.log('open');
   }
 
   closeMobileMenu() {
     this.menuMobileState = false;
-    console.log('close');
   }
 
   close(reason: string) {

@@ -8,16 +8,8 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <mat-toolbar>
-            <button mat-icon-button
-                    (click)="sidenav.toggle()"
-                    *ngIf="mobileBreakpoint$ | async">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span></span>
-            <app-period-select></app-period-select>
-        </mat-toolbar>
-        <main [@mobileMenuAnim]="menuMobileState">
+        <main [@mobileMenuAnim]="menuMobileState"
+              *ngIf="mobileBreakpoint$ | async; else largeScreenTemplate">
             <div class="router-wrapper"
                  (swipeleft)="openMobileMenu()"
                  (swiperight)="closeMobileMenu()">
@@ -62,6 +54,18 @@
                 </button> -->
             </div>
         </main>
+
+        <ng-template #largeScreenTemplate>
+            <mat-toolbar>
+                <app-period-select></app-period-select>
+            </mat-toolbar>
+            <main>
+                <div class="router-wrapper">
+                    <router-outlet></router-outlet>
+                </div>
+            </main>
+        </ng-template>
+
 
     </mat-sidenav-content>
 </mat-sidenav-container>

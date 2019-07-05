@@ -3,7 +3,7 @@ import { AnimationMetadata, trigger, transition, animate, style, query, stagger,
 export const layoutAnim: AnimationMetadata =
     trigger('mobileMenuAnim', [
         state('true', style({
-            transform: 'rotateY(-24deg)'
+            transform: 'rotateY(-40deg)'
         })),
         state('false', style({
             transform: 'rotateY(0)'
